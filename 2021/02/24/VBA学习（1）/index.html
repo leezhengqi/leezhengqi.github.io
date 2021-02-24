@@ -1,38 +1,264 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>初探VBA（甜点篇） | lee的编程小屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="世上最枯燥最无聊的事无疑于机械式地，反复地做同样一个或一组动作，如今有个新词：工具人。形容的很贴切。 2021一开始，我就切实体验了一下“工具人”这个工种，工作的原因，每天需要处理大量EXCEL表格数据，而这其中最常干的活就是：复制、粘贴、填数据、改数据、删除数据… 上面这些不是最主要的，关键是每次都要对几百份表格文件，反复无脑地进行这些动作。真的是让人抓狂和崩溃的事，怎么办？想办法呗。 我将任务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探VBA（甜点篇）">
+<meta property="og:url" content="http://yoursite.com/2021/02/24/VBA%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="lee的编程小屋">
+<meta property="og:description" content="世上最枯燥最无聊的事无疑于机械式地，反复地做同样一个或一组动作，如今有个新词：工具人。形容的很贴切。 2021一开始，我就切实体验了一下“工具人”这个工种，工作的原因，每天需要处理大量EXCEL表格数据，而这其中最常干的活就是：复制、粘贴、填数据、改数据、删除数据… 上面这些不是最主要的，关键是每次都要对几百份表格文件，反复无脑地进行这些动作。真的是让人抓狂和崩溃的事，怎么办？想办法呗。 我将任务">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-02-24T13:31:31.092Z">
+<meta property="article:modified_time" content="2021-02-24T09:54:08.813Z">
+<meta property="article:author" content="leezhengqi">
+<meta property="article:tag" content="VBA">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="lee的编程小屋" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
+  
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-{% block page_class %}page-post-detail{% endblock %}
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lee的编程小屋</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/tags">tags</a>
+        
+          <a class="main-nav-link" href="/about">about</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-VBA学习（1）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/02/24/VBA%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" class="article-date">
+  <time datetime="2021-02-24T13:31:31.092Z" itemprop="datePublished">2021-02-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+  </div>
 
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      初探VBA（甜点篇）
+    </h1>
+  
 
-{% block content %}
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>世上最枯燥最无聊的事无疑于机械式地，反复地做同样一个或一组动作，如今有个新词：工具人。形容的很贴切。</p>
+<p>2021一开始，我就切实体验了一下“工具人”这个工种，工作的原因，每天需要处理大量EXCEL表格数据，而这其中最常干的活就是：复制、粘贴、填数据、改数据、删除数据…</p>
+<p>上面这些不是最主要的，关键是每次都要对几百份表格文件，反复无脑地进行这些动作。真的是让人抓狂和崩溃的事，怎么办？<br>想办法呗。</p>
+<p>我将任务进行梳理，发现当前所做的事情有个突出的特点，也是最让人讨厌的地方：<br>在许多个EXCEL文件中，做完全相同的动作，完全相同。</p>
+<p>如果模拟手工操作的话，就是这样的步骤：<br>1、打开文件1<br>2、一顿操作猛如虎<br>3、打开文件2<br>4、一顿操作猛如虎<br>…<br>就像这样，反反复复做个几百次。<br>这不正是程序擅长干的事儿吗，此时心头的那个勾子开始不安分了，我决定尝试一下，倘若能让电脑帮自己做这个事，岂不是爽歪歪。<br>通过上面的梳理，其实这个事情的逻辑已经很清楚了，因为确实很简单，所以实际上也没啥逻辑可言，但刚开始嘛，有点笨拙是正常的，不是吗<br>事情的逻辑就是：<br>循环反复打开文件，进行相关操作<br>所以要解决的问题是</p>
+<p><strong><em><p align="left">1、首先是如何打开文件，手工是双击，可VBA中应该怎么做呢</p></em></strong><br><strong><em><p align="left">2、然后是如何循环地打开待处理的文件，通过VBA如何实现</p></em></strong><br><strong><em><p align="left">3、最后是在打开的文件中进行相关的数据处理</p></em></strong></p>
+<p>好了，问题明确了，那就开干！<span id="more"></span><br>通过搜索，我首先找到了第1个问题的解决方法：</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Application.GetOpenFilename(<span class="string">&quot;待打开的文件路径&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>本以为问题就这么愉快地解决了，然而事实证明，so young,so simple.<br>第2个问题着实花了一些时间去找解决方案，最后还是请教了前面提到的大神才得以解决，这也说明了一个道理：跟着高手混，那学习效率杠杆的。<br>于是，我如获至宝地拿到问题2的解决方案，现实却啪啪打脸，看着这些代码，我一脸懵圈。</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&#x27;选取多个文件打开后，处理并关闭</span></span><br><span class="line"><span class="keyword">Sub</span> test()</span><br><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"><span class="keyword">Dim</span> wb <span class="keyword">As</span> Workbook</span><br><span class="line">str = Application.GetOpenFilename(<span class="string">&quot;Excel文件,*.xls*&quot;</span>, , <span class="string">&quot;请选择&quot;</span>)</span><br><span class="line">    <span class="keyword">If</span> str &lt;&gt; <span class="string">&quot;False&quot;</span> <span class="keyword">Then</span>    </span><br><span class="line">        <span class="keyword">Set</span> wb = Workbooks.Open(str)</span><br><span class="line">    <span class="comment">&#x27;#######################&#x27;这里针对打开的文件进行操作&#x27;#######################</span></span><br><span class="line">        wb.save    </span><br><span class="line">        wb.Close</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>虽然有点底子，可还是看不太明白，可是既然大神都说这么可以，那就OK。<br>来不及搞懂了，还有那么多文档要处理呢，不好意思，我就先拿来主义了。于是，我马上实操了一把，代码是这样的：</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&#x27;实战应用：将多个EXCEL文件中的表名为“网络性能验收1-CQT”中的G8单元格内容清空</span></span><br><span class="line"><span class="keyword">Sub</span> test()</span><br><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"><span class="keyword">Dim</span> wb <span class="keyword">As</span> Workbook</span><br><span class="line">str = Application.GetOpenFilename(<span class="string">&quot;Excel文件,*.xls*&quot;</span>, , <span class="string">&quot;请选择&quot;</span>)</span><br><span class="line">    <span class="keyword">If</span> str &lt;&gt; <span class="string">&quot;False&quot;</span> <span class="keyword">Then</span>    </span><br><span class="line">        <span class="keyword">Set</span> wb = Workbooks.Open(str)</span><br><span class="line">    <span class="comment">&#x27;#######################&#x27;这里针对打开的文件进行操作&#x27;#######################</span></span><br><span class="line">        Sheets(<span class="string">&quot;网络性能验收1-CQT&quot;</span>).Range(<span class="string">&quot;g8&quot;</span>) = <span class="string">&quot;&quot;</span></span><br><span class="line">        wb.save    </span><br><span class="line">        wb.Close</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>以上代码实现的就是将EXCEL文件中指定表格中的指定单元格中内容清空。<br>将代码copy到VBA代码窗口，然后运行，随后就立即弹出一个文件选取对话框，选中想要处理的EXCEL文件，点击确定。<br>注意，期待已有的那种爽的感觉来了，文件一个个地打开并处理，自动保存、关闭.而你则悠哉游哉，尽情享受这轻松一刻，还有电脑帮你打工的快感，剩下要做的就是享用劳动成果，无他。</p>
+<p>可是你以为这就结束了，然而并没有，其实才刚刚开始，别忘了咱们最初讲的，这波操作只是让你直观地体验一下“爽”的感觉，因为这会让接下来的路走的更远。</p>
+<p>接下来要做什么呢？肯定是去搞懂这段代码啊，俗话说的好：拿别人给的“鱼”，不如自己学会“渔”。因为刚才给的代码只是适用于某些固定场景，如果不搞懂其中原理的话，稍微换个场景，就不知怎么弄了。难道再去找大神？大神那是要做大事的，反正我是不好意思了。<br>那该咋办？整呗！不就这几行代码吗，弄不懂我就把它吃喽。</p>
+<p>好，开干！！！</p>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/24/VBA%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" data-id="ckljhscii0003mcu18tjhfm0c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li></ul>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/02/24/VBA%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          VBA代码练习----运用EXCEL数据透视表进行工作表拆分
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/11/%E8%BF%AD%E4%BB%A3%E6%80%9D%E7%BB%B4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何将“迭代”思维应用到工作和生活</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E6%82%9F/" rel="tag">感悟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B6%B3%E8%BF%B9/" rel="tag">足迹</a></li></ul>
+    </div>
+  </div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/VBA/" style="font-size: 20px;">VBA</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 10px;">感悟</a> <a href="/tags/%E8%B6%B3%E8%BF%B9/" style="font-size: 10px;">足迹</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/02/24/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/">我的编程学习之旅</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/24/VBA%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/">VBA代码练习----运用EXCEL数据透视表进行工作表拆分</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/24/VBA%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/">初探VBA（甜点篇）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/11/%E8%BF%AD%E4%BB%A3%E6%80%9D%E7%BB%B4/">如何将“迭代”思维应用到工作和生活</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 leezhengqi<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">tags</a>
+  
+    <a href="/about" class="mobile-nav-link">about</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>
