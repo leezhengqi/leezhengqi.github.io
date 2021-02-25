@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>lee的编程小屋</title>
+  <title>python学习（第一篇） | lee的编程小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="lee的编程小屋">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="由于工作需要从文件中批量提取图片，试过VBA的方式获取，但是得到的图片模糊，达不到要求，几经查找，不断对比，最终锁定这种方法，即通过先把文件变为压缩包的方式，而后解压此压缩包，进而获取到其中的图片。 这种方式获取到的图片与原图一样。具体逻辑如下：1、判断是否是文件和判断文件是否存在2、修改指定目录下的文件类型名，将excel后缀名修改为.zip3、解压文件4、读取解压后的文件夹，打印图片路径以下是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python学习（第一篇）">
+<meta property="og:url" content="http://yoursite.com/2021/02/25/python%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/index.html">
 <meta property="og:site_name" content="lee的编程小屋">
+<meta property="og:description" content="由于工作需要从文件中批量提取图片，试过VBA的方式获取，但是得到的图片模糊，达不到要求，几经查找，不断对比，最终锁定这种方法，即通过先把文件变为压缩包的方式，而后解压此压缩包，进而获取到其中的图片。 这种方式获取到的图片与原图一样。具体逻辑如下：1、判断是否是文件和判断文件是否存在2、修改指定目录下的文件类型名，将excel后缀名修改为.zip3、解压文件4、读取解压后的文件夹，打印图片路径以下是">
 <meta property="og:locale">
+<meta property="article:published_time" content="2021-02-25T05:23:54.522Z">
+<meta property="article:modified_time" content="2021-02-25T08:32:30.617Z">
 <meta property="article:author" content="leezhengqi">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="lee的编程小屋" type="application/atom+xml">
@@ -66,9 +71,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-python学习（1）" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-python学习（1）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/02/25/python%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" class="article-date">
   <time datetime="2021-02-25T05:23:54.522Z" itemprop="datePublished">2021-02-25</time>
@@ -85,8 +88,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/25/python%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/">python学习（第一篇）</a>
+    <h1 class="article-title" itemprop="name">
+      python学习（第一篇）
     </h1>
   
 
@@ -118,259 +121,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-VBA学习（2）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/02/25/VBA%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" class="article-date">
-  <time datetime="2021-02-24T22:13:27.382Z" itemprop="datePublished">2021-02-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/25/VBA%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/">VBA学习（第2篇）</a>
-    </h1>
+    <a href="/2021/02/25/VBA%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VBA学习（第2篇）</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>上次的小试牛刀，让我爽了一把，这次我想静下心来，看看这些代码都是什么意思，怎么就实现了文件的打开，处理了呢？<br>先从简单的开始吧，还记得打开单个文件的代码吗：</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&#x27;选取单个文件打开后，处理并关闭</span></span><br><span class="line"><span class="keyword">Sub</span> test()</span><br><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"><span class="keyword">Dim</span> wb <span class="keyword">As</span> Workbook</span><br><span class="line">str = Application.GetOpenFilename(<span class="string">&quot;Excel文件,*.xls*&quot;</span>, , <span class="string">&quot;请选择&quot;</span>)</span><br><span class="line">    <span class="keyword">Set</span> wb = Workbooks.Open(str)</span><br><span class="line"><span class="comment">&#x27;###################&#x27;这里针对打开的文件进行操作&#x27;##########</span></span><br><span class="line">    wb.save    </span><br><span class="line">    wb.Close</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
-<p>就从这个开始吧</p>
-<p>先说下VBA代码的构成。sub XXX()和End Sub是成对出现的，它们定义了一个过程，也就是一组动作，所有的VBA代码都是被它们框在里面的。XXX是过程名，可根据自己的需要命名，一般是代表这个过程所实现的功能的关键词。</p>
-<p>接下来里面的内容，一一来说一下：</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"><span class="keyword">Dim</span> wb <span class="keyword">As</span> Workbook</span><br></pre></td></tr></table></figure>
-<p>以上代码的作用是定义变量，或者叫声明变量，换句话说，就是接下来要使用到的东西，先把它广而告之，否则后面没法用，因为它从来没出现过，电脑不认识啊<br>比如上面的<code>Dim str As String</code>就是声明了一个名叫str的东西，告诉电脑，它是一个string类型的变量。<br><code>Dim wb As Workbook</code>则是声明了一个名叫wb的东西，同样是告诉电脑，它是一个workbook类型的变量。<br>什么？！workbook？这玩意听着有些耳熟啊。<br>是的，它就是EXCEL工作簿，也就是此处定义了wb是一个EXCEL工作簿文件，而上面的string则是“字符串”的意思，即定义了str是一个字符串变量。</p>
-<p>顾名思义，变量是可变的，它其实就像一个容器一样，可以向里面放东西，</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/25/VBA%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" data-id="cklkm0p4q0007dcu12oid687d" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-编程学习开始的地方" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/02/24/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/" class="article-date">
-  <time datetime="2021-02-24T13:31:31.109Z" itemprop="datePublished">2021-02-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/24/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/">我的编程学习之旅</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>Talk  is  cheap,Show  me the  code.</strong></p>
-<p>说出这句话，是不是很帅？<br>简直是霸气侧漏，酷毙了，有没有</p>
-<p>这大概就是程序员骨子里的那份不服输，认真的精神展现吧。</p>
-<p>我很喜欢这句话，超喜欢。<br>不只是因为它酷，更多的是这种精神感染了我。</p>
-<p>在学习和成长的道路上，我也想做个不服输的人。
-        
-          <p class="article-more-link">
-            <a href="/2021/02/24/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/24/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/" data-id="cklkm0p4u000adcu1gfkh1m97" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B6%B3%E8%BF%B9/" rel="tag">足迹</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-VBA代码练习" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/02/24/VBA%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" class="article-date">
-  <time datetime="2021-02-24T13:31:31.092Z" itemprop="datePublished">2021-02-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/24/VBA%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/">VBA代码练习----运用EXCEL数据透视表进行工作表拆分</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>代码原理 ：<br>双击数据透视表“数据区域”中的任意一个单元格，比如B4单元格，Excel会自动生成一个新的工作表，该工作表中的数据就是形成你所点击的单元格中数据的所有原始数据记录！
-        
-          <p class="article-more-link">
-            <a href="/2021/02/24/VBA%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/24/VBA%E4%BB%A3%E7%A0%81%E7%BB%83%E4%B9%A0/" data-id="cklkm0p440001dcu16oy2cpp1" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-VBA学习（1）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/02/24/VBA%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" class="article-date">
-  <time datetime="2021-02-24T13:31:31.092Z" itemprop="datePublished">2021-02-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/24/VBA%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/">初探VBA（甜点篇）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>世上最枯燥最无聊的事无疑于机械式地，反复地做同样一个或一组动作，如今有个新词：工具人。形容的很贴切。</p>
-<p>2021一开始，我就切实体验了一下“工具人”这个工种，工作的原因，每天需要处理大量EXCEL表格数据，而这其中最常干的活就是：复制、粘贴、填数据、改数据、删除数据…</p>
-<p>上面这些不是最主要的，关键是每次都要对几百份表格文件，反复无脑地进行这些动作。真的是让人抓狂和崩溃的事，怎么办？<br>想办法呗。</p>
-<p>我将任务进行梳理，发现当前所做的事情有个突出的特点，也是最让人讨厌的地方：<br>在许多个EXCEL文件中，做完全相同的动作，完全相同。</p>
-<p>如果模拟手工操作的话，就是这样的步骤：<br>1、打开文件1<br>2、一顿操作猛如虎<br>3、打开文件2<br>4、一顿操作猛如虎<br>…<br>就像这样，反反复复做个几百次。<br>这不正是程序擅长干的事儿吗，此时心头的那个勾子开始不安分了，我决定尝试一下，倘若能让电脑帮自己做这个事，岂不是爽歪歪。<br>通过上面的梳理，其实这个事情的逻辑已经很清楚了，因为确实很简单，所以实际上也没啥逻辑可言，但刚开始嘛，有点笨拙是正常的，不是吗<br>事情的逻辑就是：<br>循环反复打开文件，进行相关操作<br>所以要解决的问题是</p>
-<p><strong><em><p align="left">1、首先是如何打开文件，手工是双击，可VBA中应该怎么做呢</p></em></strong><br><strong><em><p align="left">2、然后是如何循环地打开待处理的文件，通过VBA如何实现</p></em></strong><br><strong><em><p align="left">3、最后是在打开的文件中进行相关的数据处理</p></em></strong></p>
-<p>好了，问题明确了，那就开干！
-        
-          <p class="article-more-link">
-            <a href="/2021/02/24/VBA%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/24/VBA%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" data-id="cklkm0p4f0003dcu17qt4108x" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-迭代思维" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/11/%E8%BF%AD%E4%BB%A3%E6%80%9D%E7%BB%B4/" class="article-date">
-  <time datetime="2016-09-11T14:40:36.000Z" itemprop="datePublished">2016-09-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/11/%E8%BF%AD%E4%BB%A3%E6%80%9D%E7%BB%B4/">如何将“迭代”思维应用到工作和生活</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="———迭代，完美主义终结者"><a href="#———迭代，完美主义终结者" class="headerlink" title="———迭代，完美主义终结者"></a>———迭代，完美主义终结者</h2><blockquote>
-<p>迭代是什么，什么是迭代思维<br>【百度结果】<em>迭代是重复反馈过程的活动，其目的通常是为了逼近所需目标或结果。每一次对过程的重复称为一次“迭代”，而每一次迭代得到的结果会作为下一次迭代的初始值。</em>
-        
-          <p class="article-more-link">
-            <a href="/2016/09/11/%E8%BF%AD%E4%BB%A3%E6%80%9D%E7%BB%B4/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/11/%E8%BF%AD%E4%BB%A3%E6%80%9D%E7%BB%B4/" data-id="cklkm0p50000edcu14ry8d7si" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%84%9F%E6%82%9F/" rel="tag">感悟</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
