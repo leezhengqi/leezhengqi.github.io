@@ -143,14 +143,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>上次的小试牛刀，让我爽了一把，这次我想静下心来，看看这些代码都是什么意思，怎么就实现了文件的打开，处理了呢？<br>先从简单的开始吧，还记得打开单个文件的代码吗：</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&#x27;选取单个文件打开后，处理并关闭</span></span><br><span class="line"><span class="keyword">Sub</span> test()</span><br><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"><span class="keyword">Dim</span> wb <span class="keyword">As</span> Workbook</span><br><span class="line">str = Application.GetOpenFilename(<span class="string">&quot;Excel文件,*.xls*&quot;</span>, , <span class="string">&quot;请选择&quot;</span>)</span><br><span class="line">    <span class="keyword">Set</span> wb = Workbooks.Open(str)</span><br><span class="line"><span class="comment">&#x27;###################&#x27;这里针对打开的文件进行操作&#x27;##########</span></span><br><span class="line">    wb.save    </span><br><span class="line">    wb.Close</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
-<p>就从这个开始吧</p>
-<p>先说下VBA代码的构成。sub XXX()和End Sub是成对出现的，它们定义了一个过程，也就是一组动作，所有的VBA代码都是被它们框在里面的。XXX是过程名，可根据自己的需要命名，一般是代表这个过程所实现的功能的关键词。</p>
-<p>接下来里面的内容，一一来说一下：</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"><span class="keyword">Dim</span> wb <span class="keyword">As</span> Workbook</span><br></pre></td></tr></table></figure>
-<p>以上代码的作用是定义变量，或者叫声明变量，换句话说，就是接下来要使用到的东西，先把它广而告之，否则后面没法用，因为它从来没出现过，电脑不认识啊<br>比如上面的<code>Dim str As String</code>就是声明了一个名叫str的东西，告诉电脑，它是一个string类型的变量。<br><code>Dim wb As Workbook</code>则是声明了一个名叫wb的东西，同样是告诉电脑，它是一个workbook类型的变量。<br>什么？！workbook？这玩意听着有些耳熟啊。<br>是的，它就是EXCEL工作簿，也就是此处定义了wb是一个EXCEL工作簿文件，而上面的string则是“字符串”的意思，即定义了str是一个字符串变量。</p>
-<p>顾名思义，变量是可变的，它其实就像一个容器一样，可以向里面放东西，</p>
-
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&#x27;选取单个文件打开后，处理并关闭</span></span><br><span class="line"><span class="keyword">Sub</span> test()</span><br><span class="line">    <span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line">    <span class="keyword">Dim</span> wb <span class="keyword">As</span> Workbook</span><br><span class="line">    str = Application.GetOpenFilename(<span class="string">&quot;Excel文件,*.xls*&quot;</span>, , <span class="string">&quot;请选择&quot;</span>)</span><br><span class="line">    <span class="keyword">Set</span> wb = Workbooks.Open(str)</span><br><span class="line"><span class="comment">&#x27;###################&#x27;这里针对打开的文件进行操作&#x27;##########</span></span><br><span class="line">    wb.save    </span><br><span class="line">    wb.Close</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>就从这个开始吧
+        
+          <p class="article-more-link">
+            <a href="/2021/02/25/VBA%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
