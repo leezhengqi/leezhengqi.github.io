@@ -68,6 +68,99 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-VBA常用代码（自定义函数）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%EF%BC%89/" class="article-date">
+  <time datetime="2021-03-02T08:25:08.163Z" itemprop="datePublished">2021-03-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/">常用代码</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%EF%BC%89/">VBA常用代码（自定义函数）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>相比<a href="">自定义带参数的sub过程</a>来说，</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%EF%BC%89/" data-id="cklrqzeyg0000x0u1aj885btk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">VBA常用代码</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-VBA常用代码（自定义带参数的sub过程）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84sub%E8%BF%87%E7%A8%8B%EF%BC%89/" class="article-date">
+  <time datetime="2021-03-02T07:40:30.743Z" itemprop="datePublished">2021-03-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/">常用代码</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84sub%E8%BF%87%E7%A8%8B%EF%BC%89/">VBA常用代码（自定义带参数的sub过程）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>看了这么多VBA代码，相信你应该比较熟悉这个结构了：</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 过程名()</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>前面也讲过，这在VBA里面称为“一个过程”。所有需要做的操作都包含在过程中，也就是夹在<code>Sub 过程名()</code>和<code>End Sub</code>之间。<br>我们之前看到的代码，无一例外，<code>Sub 过程名()</code>的括号中是空的，也就是不带任何参数的，实际使用时，可能存在与外部交互，也就是sub过程中的用到的变量，需要从外部输入才能确定的情况，那该怎么办？<br>解决办法就是：自定义一个待参数的sub过程。按照惯例，先上代码：</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 创建表(str <span class="keyword">As</span> <span class="type">String</span>)</span><br><span class="line"><span class="keyword">Dim</span> sht <span class="keyword">As</span> Worksheet</span><br><span class="line"><span class="keyword">For</span> <span class="keyword">Each</span> sht <span class="keyword">In</span> Sheets</span><br><span class="line">    <span class="keyword">If</span> sht.Name = str <span class="keyword">Then</span></span><br><span class="line">        k = <span class="number">1</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"><span class="keyword">If</span> k = <span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">    Sheets.Add after:=Sheets(Sheets.Count)</span><br><span class="line">    Sheets(Sheets.Count).Name = str</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>上述代码的意思就是，新建工作表，并将工作表命名为str，前提是当现有文件中存在同名str的工作表时，不创建。<br>为什么要自定义这种带参数的sub过程呢，刚才上面提到了一点，下面再通过具体的例子，理解一下：</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 创建工作表并命名()</span><br><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line">str = InputBox(<span class="string">&quot;请输入要创建工作表的名字&quot;</span>)</span><br><span class="line"><span class="keyword">Call</span> 创建表(str)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>上述代码中，<code>InputBox(&quot;请输入要创建工作表的名字&quot;)</code>就会弹出一个对话框，让你输入<strong>要创建的工作表的名字</strong>，当输入完成，点击确定后，你输入的内容就会被赋值给str这个变量。接着代码继续向下执行<code>Call 创建表(str)</code>,意思就是调用之前写好的过程<code>Sub 创建表(str As String)</code>,同时将str这个变量作为参数输入到这个sub过程中。<br>最后，执行的效果就是在当前EXCEL工作簿文件中新建了一张名字为“str”的工作表。比如你但是输入的工作表名字是：“我的工作表”，那么工作簿里就会新建一个名字为“我的工作表”的新表。不行，就试试呗。</p>
+<p>另外，仔细观察一下新建的那张表处于的位置，无论原有文件中有多少张工作表，新建的表始终处于所有表的最后面，知道为什么吗？<br>答案就在上面的某一行代码里，找找看吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84sub%E8%BF%87%E7%A8%8B%EF%BC%89/" data-id="cklrqzeym0001x0u13ved89jk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">VBA常用代码</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-VBA常用代码（删除操作）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C%EF%BC%89/" class="article-date">
@@ -445,103 +538,6 @@
 
 
   
-    <article id="post-编程学习（心理按摩篇）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/02/25/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%BF%83%E7%90%86%E6%8C%89%E6%91%A9%E7%AF%87%EF%BC%89/" class="article-date">
-  <time datetime="2021-02-25T14:14:01.296Z" itemprop="datePublished">2021-02-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%84%9F%E6%82%9F/">编程感悟</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/25/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%BF%83%E7%90%86%E6%8C%89%E6%91%A9%E7%AF%87%EF%BC%89/">编程学习（心理按摩篇）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前面叨叨地说了那么多代码，可能你有点懵，甚至不想再看下去了，心里总有一种说不出的，莫名的憋闷的感觉，或者其他什么感觉，总之是不爽的感觉。</p>
-<p><em>“没见过你这样的，一开始就弄这么一堆东西，啥也看不明白，难道你不知道我从来没学过这玩意啊，真是浪费时间”。</em></p>
-<p>嗯，不出意外，你的心里应该是类似的感觉吧。<br>既然这样，今天这篇就不说那些破玩意，咱们一起谈谈生活，聊聊人生。
-        
-          <p class="article-more-link">
-            <a href="/2021/02/25/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%BF%83%E7%90%86%E6%8C%89%E6%91%A9%E7%AF%87%EF%BC%89/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/25/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%BF%83%E7%90%86%E6%8C%89%E6%91%A9%E7%AF%87%EF%BC%89/" data-id="cklrmiq1n0012eou1cq0bamp2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%84%9F%E6%82%9F/" rel="tag">感悟</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python常用代码" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/02/25/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" class="article-date">
-  <time datetime="2021-02-25T05:23:54.522Z" itemprop="datePublished">2021-02-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/">常用代码</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/25/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/">python常用代码（EXCEL文件中图片提取）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>上回说到以前虽然与python有过美丽的邂逅，但好景不长，敌不过现实的“残酷”，最后只能分开了。那么这次又是怎样重续前缘的呢？事情是这样的:<br>前段时间，由于工作需要从大量EXCEL文件中提取图片，开始时试过VBA的方式，但是得到的图片模糊，达不到要求，几经辗转搜索，不断对比，最终锁定python实现的这种方法，即通过先把文件变为压缩包的方式，而后解压此压缩包，进而获取到其中的图片。</p>
-<p>这种方式获取到的图片与原图像素一般无二。具体逻辑如下：<br><strong><em>1、判断是否是文件和判断文件是否存在</em></strong><br><strong><em>2、修改指定目录下的文件类型名，将excel后缀名修改为.zip</em></strong><br><strong><em>3、解压文件</em></strong><br><strong><em>4、读取解压后的文件夹，打印图片路径</em></strong><br>以下是将每一步想要实现的功能，封装成一个个单独的自定义函数模块，最后再把这些模块组合起来，完成整体功能。
-        
-          <p class="article-more-link">
-            <a href="/2021/02/25/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/25/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" data-id="cklrmiq1i000ueou120x075lc" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">python常用代码</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -575,7 +571,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/VBA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 20px;">VBA基础知识</a> <a href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 16.67px;">VBA常用代码</a> <a href="/tags/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">python常用代码</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 13.33px;">感悟</a> <a href="/tags/%E8%B6%B3%E8%BF%B9/" style="font-size: 13.33px;">足迹</a>
+      <a href="/tags/VBA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 20px;">VBA基础知识</a> <a href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 20px;">VBA常用代码</a> <a href="/tags/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">python常用代码</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 15px;">感悟</a> <a href="/tags/%E8%B6%B3%E8%BF%B9/" style="font-size: 15px;">足迹</a>
     </div>
   </div>
 
@@ -597,6 +593,14 @@
       <ul>
         
           <li>
+            <a href="/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%EF%BC%89/">VBA常用代码（自定义函数）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84sub%E8%BF%87%E7%A8%8B%EF%BC%89/">VBA常用代码（自定义带参数的sub过程）</a>
+          </li>
+        
+          <li>
             <a href="/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C%EF%BC%89/">VBA常用代码（删除操作）</a>
           </li>
         
@@ -606,14 +610,6 @@
         
           <li>
             <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E6%8B%86%E5%88%86%E4%B8%8E%E7%AD%9B%E9%80%89%EF%BC%89/">VBA常用代码（表格拆分&amp;筛选）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/">VBA常用代码（表格合并）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/">VBA学习（单元格对象操作）</a>
           </li>
         
       </ul>
