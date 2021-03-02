@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>VBA常用代码（表格拆分&amp;筛选） | lee的编程小屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前面说了表格合并,以下是表格拆分的常用代码，希望看后能举一反三，真正应用到实际工作中。代码1效果实现：筛选指定表格的指定列，并在同一个工作簿文件中创建不同的表（表名与所筛选的字段名相同），将每次筛选得到的数据结果复制到对应的表格中。写代码之前先梳理一下做这个事情的思路，也就是咱们先“纸上谈兵”一下，然后再把纸上的自然语言翻译为VBA语言：step1：先将源表拆分成多个表（拆分原则：拆分出来的表名与">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VBA常用代码（表格拆分&amp;筛选）">
+<meta property="og:url" content="http://yoursite.com/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E6%8B%86%E5%88%86%E4%B8%8E%E7%AD%9B%E9%80%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="lee的编程小屋">
+<meta property="og:description" content="前面说了表格合并,以下是表格拆分的常用代码，希望看后能举一反三，真正应用到实际工作中。代码1效果实现：筛选指定表格的指定列，并在同一个工作簿文件中创建不同的表（表名与所筛选的字段名相同），将每次筛选得到的数据结果复制到对应的表格中。写代码之前先梳理一下做这个事情的思路，也就是咱们先“纸上谈兵”一下，然后再把纸上的自然语言翻译为VBA语言：step1：先将源表拆分成多个表（拆分原则：拆分出来的表名与">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-02-27T07:46:49.670Z">
+<meta property="article:modified_time" content="2021-02-27T09:43:49.347Z">
+<meta property="article:author" content="leezhengqi">
+<meta property="article:tag" content="VBA常用代码">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="lee的编程小屋" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lee的编程小屋</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/tags">tags</a>
+        
+          <a class="main-nav-link" href="/about">about</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-VBA常用代码（表格拆分与筛选）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E6%8B%86%E5%88%86%E4%B8%8E%E7%AD%9B%E9%80%89%EF%BC%89/" class="article-date">
+  <time datetime="2021-02-27T07:46:49.670Z" itemprop="datePublished">2021-02-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      VBA常用代码（表格拆分&amp;筛选）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前面说了<a target="_blank" rel="noopener" href="https://leezhengqi.github.io/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/">表格合并</a>,以下是表格拆分的常用代码，希望看后能举一反三，真正应用到实际工作中。<br><strong>代码1</strong><br>效果实现：筛选指定表格的指定列，并在同一个工作簿文件中创建不同的表（表名与所筛选的字段名相同），将每次筛选得到的数据结果复制到对应的表格中。<br>写代码之前先梳理一下做这个事情的思路，也就是咱们先“纸上谈兵”一下，然后再把纸上的自然语言翻译为VBA语言：<br>step1：先将源表拆分成多个表（拆分原则：拆分出来的表名与要筛选列的字段内容相同，且避免出现所建表的表名重复的问题出现）<br>step2：根据输入的需要筛选的列进行数据筛选<br>step3：将筛选得到的数据拷贝至对应表名的表中</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> chaifen ()</span><br><span class="line"><span class="keyword">Dim</span> sht <span class="keyword">As</span> Worksheet</span><br><span class="line"><span class="keyword">Dim</span> k, i, j <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">Dim</span> irow <span class="keyword">As</span> <span class="type">Integer</span> <span class="comment">&#x27;这个说的是一共多少行</span></span><br><span class="line"><span class="keyword">Dim</span> l</span><br><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span> <span class="comment">&#x27;用于提取当前工作表的名字</span></span><br><span class="line">str = ActiveSheet.Name <span class="comment">&#x27;取得当前要处理的表的名字</span></span><br><span class="line">l = InputBox(<span class="string">&quot;请输入你要按哪列分&quot;</span>)</span><br><span class="line"><span class="comment">&#x27;删除无意义的表</span></span><br><span class="line">Application.DisplayAlerts = <span class="literal">False</span> <span class="comment">&#x27;此语句作用是将警告框关闭（删除动作会弹出警告框）</span></span><br><span class="line"><span class="keyword">If</span> Sheets.Count &gt; <span class="number">1</span> <span class="keyword">Then</span>    </span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> sht1 <span class="keyword">In</span> Sheets        </span><br><span class="line">        <span class="keyword">If</span> sht1.Name &lt;&gt; str <span class="keyword">Then</span> <span class="comment">&#x27;这里是第3处修改，不再用“数据”这个固定的名字了，而是用之前取到的名字           </span></span><br><span class="line">            sht1.Delete        </span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span>    </span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">Application.DisplayAlerts = <span class="literal">True</span> <span class="comment">&#x27;此语句是将之前关闭的警告框重新设置为正常弹出</span></span><br><span class="line"><span class="comment">&#x27;获取待处理表格str的总行数</span></span><br><span class="line">irow = Sheets(str).Range(<span class="string">&quot;a&quot;</span> &amp; Rows.Count).<span class="keyword">End</span>(xlUp).Row </span><br><span class="line"><span class="comment">&#x27;拆分表&#x27;判断当前已有的表的名字是否和指定单元格名字一致，如果一致，则不重复创建同名表格（用K变量的值变化表示是否存在同名表）</span></span><br><span class="line"><span class="keyword">For</span> i = <span class="number">2</span> <span class="keyword">To</span> irow    </span><br><span class="line">    k = <span class="number">0</span>    </span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> sht <span class="keyword">In</span> Sheets        </span><br><span class="line">        <span class="keyword">If</span> sht.Name = Sheets(str).Cells(i, l) <span class="keyword">Then</span>          </span><br><span class="line">            k = <span class="number">1</span>        </span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span>    </span><br><span class="line">    <span class="keyword">Next</span>        </span><br><span class="line"><span class="comment">&#x27;如果不一致，即K=0，那么在现有表格的后面添加新表，同时将新表的名字修改为指定单元格的值    </span></span><br><span class="line">    <span class="keyword">If</span> k = <span class="number">0</span> <span class="keyword">Then</span>        </span><br><span class="line">        Sheets.Add after:=Sheets(Sheets.Count) <span class="comment">&#x27;新添加的表格都在原有表的后面        </span></span><br><span class="line">        Sheets(Sheets.Count).Name = Sheets(str).Cells(i, l)  </span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"><span class="comment">&#x27;根据输入的需要筛选的列进行数据筛选，并将筛选得到的数据拷贝至对应表名的表中   </span></span><br><span class="line"><span class="keyword">For</span> j = <span class="number">2</span> <span class="keyword">To</span> Sheets.Count<span class="comment">&#x27;在源数据表中以指定j表名筛选第l列    </span></span><br><span class="line">    Sheets(str).Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).AutoFilter Field:=l, Criteria1:=Sheets(j).Name</span><br><span class="line"><span class="comment">&#x27;将上面筛选的结果拷贝到指定j表的a1单元格中    </span></span><br><span class="line">    Sheets(str).Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).Copy Sheets(j).Range(<span class="string">&quot;a1&quot;</span>)</span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"><span class="comment">&#x27;此语句用于去掉单元格的筛选</span></span><br><span class="line">Sheets(str).Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).AutoFilter   </span><br><span class="line"></span><br><span class="line"><span class="comment">&#x27;上述代码执行完成后，选择源数据表，使其为当前活动表</span></span><br><span class="line">Sheets(str).<span class="keyword">Select</span>   </span><br><span class="line">MsgBox <span class="string">&quot;已处理完毕&quot;</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p><strong>代码2</strong><br>使用场景：以下代码实现的功能和上面的代码一样，只是代码是实现上稍稍简洁了一些，即原有的代码中仅定义了str是待处理的表格的名字，每次操作这个表的时候，都要用sheets(str),稍显啰嗦，而以下直接定义了变量sht0来指代待处理的表格，如此，就可以直接对sht0进行操作了。</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span>  chaifenupdate ()</span><br><span class="line"><span class="keyword">Dim</span> sht <span class="keyword">As</span> Worksheet</span><br><span class="line"><span class="keyword">Dim</span> k, i, j <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">Dim</span> irow <span class="keyword">As</span> <span class="type">Integer</span> <span class="comment">&#x27;这个说的是一共多少行</span></span><br><span class="line"><span class="keyword">Dim</span> l <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">Dim</span> sht0 <span class="keyword">As</span> WorksheetSet </span><br><span class="line">sht0 = ActiveSheet </span><br><span class="line"><span class="comment">&#x27;将对象赋值到变量，需要用</span></span><br><span class="line"><span class="keyword">set</span> l = InputBox(<span class="string">&quot;请输入你要按哪列分&quot;</span>)</span><br><span class="line"><span class="comment">&#x27;1、删除无意义的表</span></span><br><span class="line">Application.DisplayAlerts = <span class="literal">False</span></span><br><span class="line"><span class="keyword">If</span> Sheets.Count &gt; <span class="number">1</span> <span class="keyword">Then</span>    </span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> sht1 <span class="keyword">In</span> Sheets        </span><br><span class="line">        <span class="keyword">If</span> sht1.Name &lt;&gt; sht0.Name <span class="keyword">Then</span>            </span><br><span class="line">            sht1.Delete        </span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span>    </span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">Application.DisplayAlerts = <span class="literal">True</span></span><br><span class="line">irow = sht0.Range(<span class="string">&quot;a65536&quot;</span>).<span class="keyword">End</span>(xlUp).Row</span><br><span class="line"><span class="comment">&#x27;2、拆分表</span></span><br><span class="line"><span class="keyword">For</span> i = <span class="number">2</span> <span class="keyword">To</span> irow    </span><br><span class="line">    k = <span class="number">0</span>    </span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> sht <span class="keyword">In</span> Sheets        </span><br><span class="line">        <span class="keyword">If</span> sht.Name = sht0.Cells(i, l) <span class="keyword">Then</span>            </span><br><span class="line">            k = <span class="number">1</span>        </span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span>    </span><br><span class="line">    <span class="keyword">Next</span>            </span><br><span class="line">    <span class="keyword">If</span> k = <span class="number">0</span> <span class="keyword">Then</span>        </span><br><span class="line">    Sheets.Add after:=Sheets(Sheets.Count)        </span><br><span class="line">    Sheets(Sheets.Count).Name = sht0.Cells(i, l)    </span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"><span class="comment">&#x27;3、按照指定列进行筛选，并将筛选结果复制到对应表中</span></span><br><span class="line"><span class="keyword">For</span> j = <span class="number">2</span> <span class="keyword">To</span> Sheets.Count    </span><br><span class="line">    sht0.Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).AutoFilter Field:=l, Criteria1:=Sheets(j).Name    </span><br><span class="line">    sht0.Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).Copy Sheets(j).Range(<span class="string">&quot;a1&quot;</span>)</span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line">sht0.Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).AutoFilter</span><br><span class="line">sht0.<span class="keyword">Select</span></span><br><span class="line">MsgBox <span class="string">&quot;已处理完毕&quot;</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<p>通过表格拆分的代码实现过程，感受最为深刻的几个点是：<br>1、代码的编写不是一蹴而就的，好的代码一定是不断迭代优化更新的产物<br>2、开始写代码实现之前，不仅要先把实现的思路想清楚，还要“纸上谈兵”<br>3、将第2步纸上谈兵得出的做事步骤（SOP），用代码来实现<br>还有一个体会，或者说是屡试不爽的tips：如果涉及同样一个事需要做很多次的，就先把做一次，怎么做的代码写好，然后再装到For…Next循环中即可，当然，还需要将其中的固定值改为变量。<br>如今互联网如此发达的时代，对于编程而言，语法规则什么的，真的不是最重要的，关键是逻辑，说的直白一点，就是把想干的事儿想清楚。<br>知道怎么干了，编程只不过是将自然语言翻译一下罢了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E6%8B%86%E5%88%86%E4%B8%8E%E7%AD%9B%E9%80%89%EF%BC%89/" data-id="cklrcodjg000o9cu183k559hk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">VBA常用代码</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VBA常用代码（表格合并）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA%E5%AD%A6%E4%B9%A0/" rel="tag">VBA学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">VBA常用代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">python常用代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E6%82%9F/" rel="tag">感悟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B6%B3%E8%BF%B9/" rel="tag">足迹</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/VBA%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">VBA学习</a> <a href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 15px;">VBA常用代码</a> <a href="/tags/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">python常用代码</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 15px;">感悟</a> <a href="/tags/%E8%B6%B3%E8%BF%B9/" style="font-size: 10px;">足迹</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E6%8B%86%E5%88%86%E4%B8%8E%E7%AD%9B%E9%80%89%EF%BC%89/">VBA常用代码（表格拆分&amp;筛选）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/">VBA常用代码（表格合并）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/">VBA学习（单元格对象操作）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/">VBA学习（工作簿对象操作）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/26/VBA%E5%AD%A6%E4%B9%A0%EF%BC%884%EF%BC%89/">VBA学习（工作表对象的操作）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 leezhengqi<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">tags</a>
+  
+    <a href="/about" class="mobile-nav-link">about</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

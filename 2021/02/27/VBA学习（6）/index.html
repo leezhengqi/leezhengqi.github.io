@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>VBA学习（工作簿对象操作） | lee的编程小屋</title>
+  <title>VBA学习（单元格对象操作） | lee的编程小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同样地“纸上谈兵”一下，规划规划这个事情如何做：">
+  <meta name="description" content="前面讲完了EXCEL工作簿和工作表常见操作对应的VBA代码，今天这篇主要讲解的内容是单元格的操作所对应的VBA代码，也是学习VBA的重头戏内容。因为无论是在工作表中编辑数据，还是从工作表中读取数据，归根结底，是需要对单元格进行操作，因为所有的数据都是写在一个个单元格里面的。以下分为三个大的部分进行讲解： 1、单元格的常见表示方式 123[A1]Range(&quot;A1&quot;)Cells(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VBA学习（工作簿对象操作）">
+<meta property="og:title" content="VBA学习（单元格对象操作）">
 <meta property="og:url" content="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/index.html">
 <meta property="og:site_name" content="lee的编程小屋">
-<meta property="og:description" content="同样地“纸上谈兵”一下，规划规划这个事情如何做：">
+<meta property="og:description" content="前面讲完了EXCEL工作簿和工作表常见操作对应的VBA代码，今天这篇主要讲解的内容是单元格的操作所对应的VBA代码，也是学习VBA的重头戏内容。因为无论是在工作表中编辑数据，还是从工作表中读取数据，归根结底，是需要对单元格进行操作，因为所有的数据都是写在一个个单元格里面的。以下分为三个大的部分进行讲解： 1、单元格的常见表示方式 123[A1]Range(&quot;A1&quot;)Cells(">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-02-27T01:21:08.952Z">
-<meta property="article:modified_time" content="2021-02-27T05:21:00.834Z">
+<meta property="article:modified_time" content="2021-03-02T01:37:09.930Z">
 <meta property="article:author" content="leezhengqi">
-<meta property="article:tag" content="VBA">
+<meta property="article:tag" content="VBA学习">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="lee的编程小屋" type="application/atom+xml">
@@ -78,7 +78,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
   </div>
 
   </div>
@@ -89,7 +89,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      VBA学习（工作簿对象操作）
+      VBA学习（单元格对象操作）
     </h1>
   
 
@@ -97,15 +97,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>同样地“纸上谈兵”一下，规划规划这个事情如何做：</p>
+        <p>前面讲完了EXCEL工作簿和工作表常见操作对应的VBA代码，今天这篇主要讲解的内容是单元格的操作所对应的VBA代码，也是学习VBA的重头戏内容。<br>因为无论是在工作表中编辑数据，还是从工作表中读取数据，归根结底，是需要对单元格进行操作，因为所有的数据都是写在一个个单元格里面的。<br>以下分为三个大的部分进行讲解：</p>
+<p>1、单元格的常见表示方式</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[A1]</span><br><span class="line">Range(<span class="string">&quot;A1&quot;</span>)</span><br><span class="line">Cells(<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>是的，你没看错，上面的3种方式指代的都是单元格A1，就是工作表左上角的那个。这和咱们手动操作不同，如果直接选中A1单元格，看到的就是A1。<br>至于为什么会有这么多表示方式，VBA自有它的妙用，在这里，只需了解一下，混个眼熟，待咱们把另外2个部分的知识学完，最后再实操一下，进一步理解并体会这么多表示方式的好处。</p>
+<p>2、单元格对象常用方法</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Select</span>(选中)</span><br><span class="line">Delete(删除)</span><br><span class="line">Copy(复制)</span><br><span class="line">ClearContents(清空)</span><br><span class="line">AutoFilter(自动筛选)</span><br></pre></td></tr></table></figure>
+
+<p>3、单元格对象常用属性</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Value(值) <span class="keyword">Text</span>(文本内容)</span><br><span class="line">Row(行号)   Column(列号)</span><br><span class="line">Offset （偏移）</span><br><span class="line">Entire row （整行）</span><br></pre></td></tr></table></figure>
+<p>前面打过比方，如果把“人”看作一个对象的话，那么人所具备的属性是：有鼻有眼有手有脚…人具备的方法是：吃饭、走路、睡觉…。<br>所以可以发现，属性基本是名词，是用来描述对象特征的；而方法则基本是动词，是用来说明对象能干哪些事。<br>上述2、3、中的单元格的常用方法和属性，也是同样道理。<br>VBA是面向对象的编程，无论是工作簿、工作表还是单元格，使用它们的属性或方法时，语句结构都是一样的：<code>对象.属性</code>或<code>对象.方法</code>。比如：<br><code>Range(&quot;A1&quot;).Select</code>是选中A1单元格；<br><code>Range(&quot;A1&quot;).ClearContents</code>是清空A1单元格中的内容；<br><code>Range(&quot;A1&quot;).Entire row.Delete</code>是将A1单元格所在的整行删除；<br><code>Sheets(1).Range(&quot;A1&quot;).Offset(2, 3) = &quot;hello&quot;</code>是将当前工作簿中第1个工作表中的A1单元格往右偏移2行至第3行，往左偏移3列至第4行，也就是在D3单元格中填入“hello”。其中<code>Offset(2, 3)</code>中的<code>2</code>指的是行号（Row），<code>3</code>指的是列号（Column）。<br><code>Range(&quot;A1&quot;).Value</code>是指A1单元格的值；而<code>Range(&quot;A1&quot;).Text</code>则是当A1单元格设置为常规格式时，它里面的文本内容。可以用<code>Msgbox Range(&quot;A1&quot;).Value</code>和<code>Msgbox Range(&quot;A1&quot;).Text</code>打印一下，看看有何不同。</p>
+<p>这么描述，可能不是很直观，你可以动手试试，运行一下，看看效果。<br>至于单元格自动筛选的操作AutoFilter，可以结合《VBA常用代码（表格拆分&amp;筛选）》这篇文章，理解理解。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/" data-id="cklnemvpp000130u1fotecvz7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/" data-id="cklrcodjb000e9cu1h63od67v" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%AD%A6%E4%B9%A0/" rel="tag">VBA学习</a></li></ul>
 
     </footer>
   </div>
@@ -113,11 +123,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%887%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          VBA学习（单元格对象操作）
+          VBA常用代码（表格合并）
         
       </div>
     </a>
@@ -125,7 +135,7 @@
   
     <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">VBA学习（工作表对象操作）</div>
+      <div class="article-nav-title">VBA学习（工作簿对象操作）</div>
     </a>
   
 </nav>
@@ -141,7 +151,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a></li></ul>
     </div>
   </div>
 
@@ -151,7 +161,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA/" rel="tag">VBA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E6%82%9F/" rel="tag">感悟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B6%B3%E8%BF%B9/" rel="tag">足迹</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA%E5%AD%A6%E4%B9%A0/" rel="tag">VBA学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">VBA常用代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">python常用代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%84%9F%E6%82%9F/" rel="tag">感悟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B6%B3%E8%BF%B9/" rel="tag">足迹</a></li></ul>
     </div>
   </div>
 
@@ -161,7 +171,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/VBA/" style="font-size: 20px;">VBA</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 15px;">感悟</a> <a href="/tags/%E8%B6%B3%E8%BF%B9/" style="font-size: 10px;">足迹</a>
+      <a href="/tags/VBA%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">VBA学习</a> <a href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 15px;">VBA常用代码</a> <a href="/tags/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">python常用代码</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 15px;">感悟</a> <a href="/tags/%E8%B6%B3%E8%BF%B9/" style="font-size: 10px;">足迹</a>
     </div>
   </div>
 
@@ -183,23 +193,23 @@
       <ul>
         
           <li>
+            <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E6%8B%86%E5%88%86%E4%B8%8E%E7%AD%9B%E9%80%89%EF%BC%89/">VBA常用代码（表格拆分&amp;筛选）</a>
+          </li>
+        
+          <li>
             <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/">VBA常用代码（表格合并）</a>
           </li>
         
           <li>
-            <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%887%EF%BC%89/">VBA学习（单元格对象操作）</a>
+            <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/">VBA学习（单元格对象操作）</a>
           </li>
         
           <li>
-            <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/">VBA学习（工作簿对象操作）</a>
+            <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/">VBA学习（工作簿对象操作）</a>
           </li>
         
           <li>
-            <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/">VBA学习（工作表对象操作）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/02/26/VBA%E5%AD%A6%E4%B9%A0%EF%BC%884%EF%BC%89/">VBA学习（第4篇）</a>
+            <a href="/2021/02/26/VBA%E5%AD%A6%E4%B9%A0%EF%BC%884%EF%BC%89/">VBA学习（工作表对象的操作）</a>
           </li>
         
       </ul>
