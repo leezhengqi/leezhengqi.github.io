@@ -94,17 +94,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前面说了<a target="_blank" rel="noopener" href="https://leezhengqi.github.io/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/">表格合并</a>,以下是表格拆分的常用代码，希望看后能举一反三，真正应用到实际工作中。<br><strong>代码1</strong><br>效果实现：筛选指定表格的指定列，并在同一个工作簿文件中创建不同的表（表名与所筛选的字段名相同），将每次筛选得到的数据结果复制到对应的表格中。<br>写代码之前先梳理一下做这个事情的思路，也就是咱们先“纸上谈兵”一下，然后再把纸上的自然语言翻译为VBA语言：<br>step1：先将源表拆分成多个表（拆分原则：拆分出来的表名与要筛选列的字段内容相同，且避免出现所建表的表名重复的问题出现）<br>step2：根据输入的需要筛选的列进行数据筛选<br>step3：将筛选得到的数据拷贝至对应表名的表中</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> chaifen ()</span><br><span class="line"><span class="keyword">Dim</span> sht <span class="keyword">As</span> Worksheet</span><br><span class="line"><span class="keyword">Dim</span> k, i, j <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">Dim</span> irow <span class="keyword">As</span> <span class="type">Integer</span> <span class="comment">&#x27;这个说的是一共多少行</span></span><br><span class="line"><span class="keyword">Dim</span> l</span><br><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span> <span class="comment">&#x27;用于提取当前工作表的名字</span></span><br><span class="line">str = ActiveSheet.Name <span class="comment">&#x27;取得当前要处理的表的名字</span></span><br><span class="line">l = InputBox(<span class="string">&quot;请输入你要按哪列分&quot;</span>)</span><br><span class="line"><span class="comment">&#x27;删除无意义的表</span></span><br><span class="line">Application.DisplayAlerts = <span class="literal">False</span> <span class="comment">&#x27;此语句作用是将警告框关闭（删除动作会弹出警告框）</span></span><br><span class="line"><span class="keyword">If</span> Sheets.Count &gt; <span class="number">1</span> <span class="keyword">Then</span>    </span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> sht1 <span class="keyword">In</span> Sheets        </span><br><span class="line">        <span class="keyword">If</span> sht1.Name &lt;&gt; str <span class="keyword">Then</span> <span class="comment">&#x27;这里是第3处修改，不再用“数据”这个固定的名字了，而是用之前取到的名字           </span></span><br><span class="line">            sht1.Delete        </span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span>    </span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">Application.DisplayAlerts = <span class="literal">True</span> <span class="comment">&#x27;此语句是将之前关闭的警告框重新设置为正常弹出</span></span><br><span class="line"><span class="comment">&#x27;获取待处理表格str的总行数</span></span><br><span class="line">irow = Sheets(str).Range(<span class="string">&quot;a&quot;</span> &amp; Rows.Count).<span class="keyword">End</span>(xlUp).Row </span><br><span class="line"><span class="comment">&#x27;拆分表&#x27;判断当前已有的表的名字是否和指定单元格名字一致，如果一致，则不重复创建同名表格（用K变量的值变化表示是否存在同名表）</span></span><br><span class="line"><span class="keyword">For</span> i = <span class="number">2</span> <span class="keyword">To</span> irow    </span><br><span class="line">    k = <span class="number">0</span>    </span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> sht <span class="keyword">In</span> Sheets        </span><br><span class="line">        <span class="keyword">If</span> sht.Name = Sheets(str).Cells(i, l) <span class="keyword">Then</span>          </span><br><span class="line">            k = <span class="number">1</span>        </span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span>    </span><br><span class="line">    <span class="keyword">Next</span>        </span><br><span class="line"><span class="comment">&#x27;如果不一致，即K=0，那么在现有表格的后面添加新表，同时将新表的名字修改为指定单元格的值    </span></span><br><span class="line">    <span class="keyword">If</span> k = <span class="number">0</span> <span class="keyword">Then</span>        </span><br><span class="line">        Sheets.Add after:=Sheets(Sheets.Count) <span class="comment">&#x27;新添加的表格都在原有表的后面        </span></span><br><span class="line">        Sheets(Sheets.Count).Name = Sheets(str).Cells(i, l)  </span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"><span class="comment">&#x27;根据输入的需要筛选的列进行数据筛选，并将筛选得到的数据拷贝至对应表名的表中   </span></span><br><span class="line"><span class="keyword">For</span> j = <span class="number">2</span> <span class="keyword">To</span> Sheets.Count<span class="comment">&#x27;在源数据表中以指定j表名筛选第l列    </span></span><br><span class="line">    Sheets(str).Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).AutoFilter Field:=l, Criteria1:=Sheets(j).Name</span><br><span class="line"><span class="comment">&#x27;将上面筛选的结果拷贝到指定j表的a1单元格中    </span></span><br><span class="line">    Sheets(str).Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).Copy Sheets(j).Range(<span class="string">&quot;a1&quot;</span>)</span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"><span class="comment">&#x27;此语句用于去掉单元格的筛选</span></span><br><span class="line">Sheets(str).Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).AutoFilter   </span><br><span class="line"></span><br><span class="line"><span class="comment">&#x27;上述代码执行完成后，选择源数据表，使其为当前活动表</span></span><br><span class="line">Sheets(str).<span class="keyword">Select</span>   </span><br><span class="line">MsgBox <span class="string">&quot;已处理完毕&quot;</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
-<p><strong>代码2</strong><br>使用场景：以下代码实现的功能和上面的代码一样，只是代码是实现上稍稍简洁了一些，即原有的代码中仅定义了str是待处理的表格的名字，每次操作这个表的时候，都要用sheets(str),稍显啰嗦，而以下直接定义了变量sht0来指代待处理的表格，如此，就可以直接对sht0进行操作了。</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span>  chaifenupdate ()</span><br><span class="line"><span class="keyword">Dim</span> sht <span class="keyword">As</span> Worksheet</span><br><span class="line"><span class="keyword">Dim</span> k, i, j <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">Dim</span> irow <span class="keyword">As</span> <span class="type">Integer</span> <span class="comment">&#x27;这个说的是一共多少行</span></span><br><span class="line"><span class="keyword">Dim</span> l <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">Dim</span> sht0 <span class="keyword">As</span> WorksheetSet </span><br><span class="line">sht0 = ActiveSheet </span><br><span class="line"><span class="comment">&#x27;将对象赋值到变量，需要用</span></span><br><span class="line"><span class="keyword">set</span> l = InputBox(<span class="string">&quot;请输入你要按哪列分&quot;</span>)</span><br><span class="line"><span class="comment">&#x27;1、删除无意义的表</span></span><br><span class="line">Application.DisplayAlerts = <span class="literal">False</span></span><br><span class="line"><span class="keyword">If</span> Sheets.Count &gt; <span class="number">1</span> <span class="keyword">Then</span>    </span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> sht1 <span class="keyword">In</span> Sheets        </span><br><span class="line">        <span class="keyword">If</span> sht1.Name &lt;&gt; sht0.Name <span class="keyword">Then</span>            </span><br><span class="line">            sht1.Delete        </span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span>    </span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">Application.DisplayAlerts = <span class="literal">True</span></span><br><span class="line">irow = sht0.Range(<span class="string">&quot;a65536&quot;</span>).<span class="keyword">End</span>(xlUp).Row</span><br><span class="line"><span class="comment">&#x27;2、拆分表</span></span><br><span class="line"><span class="keyword">For</span> i = <span class="number">2</span> <span class="keyword">To</span> irow    </span><br><span class="line">    k = <span class="number">0</span>    </span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> sht <span class="keyword">In</span> Sheets        </span><br><span class="line">        <span class="keyword">If</span> sht.Name = sht0.Cells(i, l) <span class="keyword">Then</span>            </span><br><span class="line">            k = <span class="number">1</span>        </span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span>    </span><br><span class="line">    <span class="keyword">Next</span>            </span><br><span class="line">    <span class="keyword">If</span> k = <span class="number">0</span> <span class="keyword">Then</span>        </span><br><span class="line">    Sheets.Add after:=Sheets(Sheets.Count)        </span><br><span class="line">    Sheets(Sheets.Count).Name = sht0.Cells(i, l)    </span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"><span class="comment">&#x27;3、按照指定列进行筛选，并将筛选结果复制到对应表中</span></span><br><span class="line"><span class="keyword">For</span> j = <span class="number">2</span> <span class="keyword">To</span> Sheets.Count    </span><br><span class="line">    sht0.Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).AutoFilter Field:=l, Criteria1:=Sheets(j).Name    </span><br><span class="line">    sht0.Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).Copy Sheets(j).Range(<span class="string">&quot;a1&quot;</span>)</span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line">sht0.Range(<span class="string">&quot;a1:z&quot;</span> &amp; irow).AutoFilter</span><br><span class="line">sht0.<span class="keyword">Select</span></span><br><span class="line">MsgBox <span class="string">&quot;已处理完毕&quot;</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
-
-<p>通过表格拆分的代码实现过程，感受最为深刻的几个点是：<br>1、代码的编写不是一蹴而就的，好的代码一定是不断迭代优化更新的产物<br>2、开始写代码实现之前，不仅要先把实现的思路想清楚，还要“纸上谈兵”<br>3、将第2步纸上谈兵得出的做事步骤（SOP），用代码来实现<br>还有一个体会，或者说是屡试不爽的tips：如果涉及同样一个事需要做很多次的，就先把做一次，怎么做的代码写好，然后再装到For…Next循环中即可，当然，还需要将其中的固定值改为变量。<br>如今互联网如此发达的时代，对于编程而言，语法规则什么的，真的不是最重要的，关键是逻辑，说的直白一点，就是把想干的事儿想清楚。<br>知道怎么干了，编程只不过是将自然语言翻译一下罢了。</p>
-
+        <p>前面说了<a target="_blank" rel="noopener" href="https://leezhengqi.github.io/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/">表格合并</a>,以下是表格拆分的常用代码，希望看后能举一反三，真正应用到实际工作中。<br><strong>代码1</strong><br>效果实现：筛选指定表格的指定列，并在同一个工作簿文件中创建不同的表（表名与所筛选的字段名相同），将每次筛选得到的数据结果复制到对应的表格中。<br>写代码之前先梳理一下做这个事情的思路，也就是咱们先“纸上谈兵”一下，然后再把纸上的自然语言翻译为VBA语言：
+        
+          <p class="article-more-link">
+            <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E6%8B%86%E5%88%86%E4%B8%8E%E7%AD%9B%E9%80%89%EF%BC%89/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E6%8B%86%E5%88%86%E4%B8%8E%E7%AD%9B%E9%80%89%EF%BC%89/" data-id="cklrcodjg000o9cu183k559hk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E6%8B%86%E5%88%86%E4%B8%8E%E7%AD%9B%E9%80%89%EF%BC%89/" data-id="cklrcz0kt000og8u1gvdp4h1v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">VBA常用代码</a></li></ul>
@@ -151,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/" data-id="cklrcodjf000l9cu11c01gw8s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/" data-id="cklrcz0ks000lg8u1c1h04fly" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">VBA常用代码</a></li></ul>
@@ -189,22 +188,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前面讲完了EXCEL工作簿和工作表常见操作对应的VBA代码，今天这篇主要讲解的内容是单元格的操作所对应的VBA代码，也是学习VBA的重头戏内容。<br>因为无论是在工作表中编辑数据，还是从工作表中读取数据，归根结底，是需要对单元格进行操作，因为所有的数据都是写在一个个单元格里面的。<br>以下分为三个大的部分进行讲解：</p>
-<p>1、单元格的常见表示方式</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[A1]</span><br><span class="line">Range(<span class="string">&quot;A1&quot;</span>)</span><br><span class="line">Cells(<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>是的，你没看错，上面的3种方式指代的都是单元格A1，就是工作表左上角的那个。这和咱们手动操作不同，如果直接选中A1单元格，看到的就是A1。<br>至于为什么会有这么多表示方式，VBA自有它的妙用，在这里，只需了解一下，混个眼熟，待咱们把另外2个部分的知识学完，最后再实操一下，进一步理解并体会这么多表示方式的好处。</p>
-<p>2、单元格对象常用方法</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Select</span>(选中)</span><br><span class="line">Delete(删除)</span><br><span class="line">Copy(复制)</span><br><span class="line">ClearContents(清空)</span><br><span class="line">AutoFilter(自动筛选)</span><br></pre></td></tr></table></figure>
-
-<p>3、单元格对象常用属性</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Value(值) <span class="keyword">Text</span>(文本内容)</span><br><span class="line">Row(行号)   Column(列号)</span><br><span class="line">Offset （偏移）</span><br><span class="line">Entire row （整行）</span><br></pre></td></tr></table></figure>
-<p>前面打过比方，如果把“人”看作一个对象的话，那么人所具备的属性是：有鼻有眼有手有脚…人具备的方法是：吃饭、走路、睡觉…。<br>所以可以发现，属性基本是名词，是用来描述对象特征的；而方法则基本是动词，是用来说明对象能干哪些事。<br>上述2、3、中的单元格的常用方法和属性，也是同样道理。<br>VBA是面向对象的编程，无论是工作簿、工作表还是单元格，使用它们的属性或方法时，语句结构都是一样的：<code>对象.属性</code>或<code>对象.方法</code>。比如：<br><code>Range(&quot;A1&quot;).Select</code>是选中A1单元格；<br><code>Range(&quot;A1&quot;).ClearContents</code>是清空A1单元格中的内容；<br><code>Range(&quot;A1&quot;).Entire row.Delete</code>是将A1单元格所在的整行删除；<br><code>Sheets(1).Range(&quot;A1&quot;).Offset(2, 3) = &quot;hello&quot;</code>是将当前工作簿中第1个工作表中的A1单元格往右偏移2行至第3行，往左偏移3列至第4行，也就是在D3单元格中填入“hello”。其中<code>Offset(2, 3)</code>中的<code>2</code>指的是行号（Row），<code>3</code>指的是列号（Column）。<br><code>Range(&quot;A1&quot;).Value</code>是指A1单元格的值；而<code>Range(&quot;A1&quot;).Text</code>则是当A1单元格设置为常规格式时，它里面的文本内容。可以用<code>Msgbox Range(&quot;A1&quot;).Value</code>和<code>Msgbox Range(&quot;A1&quot;).Text</code>打印一下，看看有何不同。</p>
-<p>这么描述，可能不是很直观，你可以动手试试，运行一下，看看效果。<br>至于单元格自动筛选的操作AutoFilter，可以结合《VBA常用代码（表格拆分&amp;筛选）》这篇文章，理解理解。</p>
-
+        <p>前面讲完了EXCEL工作簿和工作表常见操作对应的VBA代码，今天这篇主要讲解的内容是单元格的操作所对应的VBA代码，也是学习VBA的重头戏内容。<br>因为无论是在工作表中编辑数据，还是从工作表中读取数据，归根结底，是需要对单元格进行操作，因为所有的数据都是写在一个个单元格里面的。<br>以下分为三个大的部分进行讲解：
+        
+          <p class="article-more-link">
+            <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/" data-id="cklrcodjb000e9cu1h63od67v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/" data-id="cklrcz0kq000gg8u14obi5oql" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%AD%A6%E4%B9%A0/" rel="tag">VBA学习</a></li></ul>
@@ -242,18 +235,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本篇主要涉及EXCEL工作簿文件的相关操作。<br>如果你经常与EXCEL表格打交道，这部分的操作应该最熟悉不过了，基本操作无非是文件新建、打开、保存、关闭。<br>那么倘若用VBA代码实现，或者说翻译成VBA语言的话，又会是什么样的呢？以下咱们就一 一来看：<br>1、新建工作簿文件（Add）<br>VBA代码：<code>Workbooks.Add</code><br>2、保存工作簿文件（Save）<br>VBA代码：<code>ActiveWorkbook.Save</code>即表示将1、中新建的工作簿文件进行保存（因为刚刚建好，处于激活状态，所以用<code>ActiveWorkbook</code>进行指代）<br>3、将工作簿文件另存为（SaveAs）<br>VBA代码：<code>ActiveWorkbook.SaveAs Filename:=&quot;d:\test111.xlsx&quot;</code>，实际场景中，咱们创建一个新的EXCEL工作簿文件，一般会将其另存到指定的路径下，此段代码就是将上述创建的文件另存到D盘根目录下，同时将文件重命名为test111<br>4、打开工作簿文件（Open）<br>VBA代码：<code>Workbooks.Open Filename:=&quot;d:\test111.xlsx&quot;</code>即表示将D盘根目录下，名字是test111的xlsx文件打开。<br>5、关闭工作簿文件（Close）<br>VBA代码：<code>ActiveWorkbook.Close</code>将打开的当前的EXCEL工作簿文件关闭。</p>
-<p>前面已经提到过，无论是工作簿还是工作表或者单元格，在VBA大家庭里，都是一个个对象，那么经常看到的“对象.Add”或“对象.Save”，其实就是针对对象进行的相关操作。<br>但不知你发现没，上述5种常见操作虽然都是针对EXCEL工作簿文件进行的，有的时候对象用的是<code>Workbooks</code>，比如<code>Workbooks.Add</code>，但有时又用<code>ActiveWorkbook</code>，比如<code>ActiveWorkbook.Save</code>。两者最大的区别就在于前者是泛指工作簿这样的对象，因为此时还没创建具体的工作簿文件，而后者则是具体的已经创建完成的工作簿文件。</p>
-<p>简言之，前者是泛指的对象，后者则是具体的对象。<br>不仅工作簿如此，工作表也是这样，比如新建一个工作表，代码为：<code>Sheets.Add</code>，若是已经存在的工作表，则可以直接进行操作，比如<code>Sheet1.Name = &quot;test&quot;</code>即是将目前的sheet1的表名修改为test。</p>
-<p>最后，咱们一起来做个练习，要求是这样的：<br>新建一个EXCEL工作簿文件，并在其中第一张工作表的A1单元格内填入“OK”，然后另存为到D盘，并命名为test.xlsx<br>VBA代码如下：</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> shishi()</span><br><span class="line"></span><br><span class="line">Workbooks.Add</span><br><span class="line">Sheets(<span class="number">1</span>).Range(<span class="string">&quot;A1&quot;</span>) = <span class="string">&quot;OK&quot;</span></span><br><span class="line">ActiveWorkbook.SaveAs Filename:=<span class="string">&quot;d:\test.xlsx&quot;</span></span><br><span class="line">ActiveWorkbook.Close</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
-<p>建议自己打开VBA代码窗口，运行一下上述代码，实际感受一下效果。另外还可以尝试修改其中的某些代码，让它实现不同的效果。</p>
-<p>更多惊喜等你发现哦！</p>
-
+        <p>本篇主要涉及EXCEL工作簿文件的相关操作。<br>如果你经常与EXCEL表格打交道，这部分的操作应该最熟悉不过了，基本操作无非是文件新建、打开、保存、关闭。<br>那么倘若用VBA代码实现，或者说翻译成VBA语言的话，又会是什么样的呢？以下咱们就一 一来看：
+        
+          <p class="article-more-link">
+            <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/" data-id="cklrcodjd000g9cu11uhc4ls8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/" data-id="cklrcz0ko000eg8u1hf052jmo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%AD%A6%E4%B9%A0/" rel="tag">VBA学习</a></li></ul>
@@ -291,23 +282,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前面说到，打开了EXCEL文件后，你就可以为所欲为，做自己想做的事情了。<br>今天就来说说这个事儿。<br>还记得上篇提到的这段代码吧：</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> str()</span><br><span class="line"><span class="keyword">Dim</span> wb <span class="keyword">As</span> Workbook</span><br><span class="line"><span class="keyword">Dim</span> i <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line">str = Application.GetOpenFilename(<span class="string">&quot;Excel文件,*.xls*&quot;</span>, , <span class="string">&quot;请选择&quot;</span>)</span><br><span class="line"><span class="keyword">For</span> i = LBound(str) <span class="keyword">To</span> UBound(str)</span><br><span class="line">    <span class="keyword">Set</span> wb = Workbooks.Open(str(i))</span><br><span class="line">    <span class="comment">&#x27;###################&#x27;这里针对打开的文件进行操作&#x27;##########</span></span><br><span class="line">    wb.Save</span><br><span class="line">    wb.Close</span><br><span class="line"><span class="keyword">Next</span></span><br></pre></td></tr></table></figure>
-<p>上面####的区域就可以把你相对EXCEL做的操作填上了。<br>比如：<code>Sheets(&quot;网络性能验收1-CQT&quot;).Range(&quot;g8&quot;) = &quot;OK&quot;</code>意思就是将EXCEL文件中名叫“网络性能验收1-CQT”的表中单元格g8里填上OK。（当然，这里的OK可以换成你想填写的任何数据）<br>比如：<code>Sheets(&quot;网络性能验收1-CQT&quot;).Range(&quot;g8&quot;) = &quot;&quot;</code>意思是将EXCEL文件中名叫“网络性能验收1-CQT”的表中单元格g8里的内容清空。</p>
-<p>上面的是简单的操作，当然也有稍微复杂的，比如：<code>Sheets(&quot;汇总表&quot;).Range(&quot;a&quot; &amp; Rows.Count).End(xlUp).Row</code>。不着急，咱先看看简单一些的，其他基本概念都是一样的，其他的内容都是在此基础上的叠加而已。</p>
-<p>如果对EXCEL不陌生的话，应该知道EXCEL文件其实应该叫EXCEL工作簿文件，英文就是Workbook，工作簿中有工作表（Worksheet），工作表里有单元格（Range），而单元格里面就可以编辑数据了。<br>这下是不是有点明白<code>Sheets(&quot;网络性能验收1-CQT&quot;).Range(&quot;g8&quot;) = &quot;OK&quot;</code>为什么能够在单元格g8写上OK了吧。<br>其实这段代码写全了，应该是：<code>wb.Sheets(&quot;网络性能验收1-CQT&quot;).Range(&quot;g8&quot;) = &quot;OK&quot;</code>,把里面的.换成“的”就相对好理解了。<br>即：wb的工作表”网络性能验收1-CQT”中的单元格g8填入OK。<br>wb是啥？前面定义了啊：<code>Dim wb As Workbook</code>，哦，wb就是一个工作簿文件。sheet是啥？工作簿里的工作表啊，那为什么不是worksheet？嗯，这是简写，也可以说是工作表的小名吧，当然，写成worksheet肯定也是对的。<br>这样一来，是不是完全对上号了：<code>wb.Sheets(&quot;网络性能验收1-CQT&quot;).Range(&quot;g8&quot;) = &quot;OK&quot;</code>翻译为自然语言就是在wb的worksheet”网络性能验收1-CQT”中的单元格g8填入OK。<br>当然，咱们打开EXCEL工作簿文件后，能做的远不止这个，那还有哪些操作呢？<br>前面说了，你可以“为所欲为”，其实意思就是手工操作时，你能的那些事儿，VBA全部可以实现。所以回顾下平时你对EXCEL做了什么？<br>在这里，咱们一起总结盘点一下：<br>工作簿是由工作表构成的，而工作表里包括了单元格，其实无论是工作簿、工作表还是单元格，在VBA眼里，都是一个个对象，什么意思呢？就是你可以对它们“为所欲为”，做想做的操作。<br>比如对于工作表对象，你可以在工作簿文件中：<br>1、增加工作表（Add）<br>2、删除工作表（Delete）<br>3、选择工作表（Select）<br>4、复制工作表（Copy）<br>当然也可以统计工作簿中的工作表数量（Count），修改工作表的名字（Name）…<br>以上这些若是手动操作，相信都很熟悉了吧，那么VBA又会如何来实现呢？白话一些就类似于，把这些操作翻译成VBA语言是什么样的呢，其实这个和中文翻译成英文是一样的道理，只是英文给老外看，VBA语言是给电脑看，毕竟让人家帮你干活，你总得交代清楚做什么吧。<br>好，咱们先来一一对比下，咱们熟悉的手工操作与相应的VBA语言，有何不同：</p>
-<p>1、增加一张工作表<br>手动操作：选中一个当前存在的工作表，然后右键插入即可，此时就会在原有工作表的前面新建了一张新表；<br>VBA语言：<code>Sheets.Add</code>实现上述同样的效果，但如果想要在原有表的后面插入一张新表，该怎么办呢？代码只需稍稍改动一下：<code>Sheets.Add after:=Sheet1</code>(其中sheet1为当前表)<br>1.1 通常情况下，新建一张表，会给它起个名字，对应的代码就是：<code>sheet2.name=&quot;新建工作表&quot;</code>（sheet2是新创建的工作表）；<br>1.2 上述操作只是增加一张表，若想同时批量增加多张表，怎么做？<br><code>Sheets.Add Count:=6</code>意思就是新建6张工作表，但这样建表有个局限，就是表名是自动生成的，如果想让新建的表格按照一定的规则命名，那就用到之前说到的for循环了<code>For ...Next ...</code>。<br>比如：你想新建6张表，并按照“第X张表”的格式命名，代码是这样</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> test()</span><br><span class="line"><span class="keyword">Dim</span> i <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">For</span> i = <span class="number">1</span> <span class="keyword">To</span> <span class="number">6</span></span><br><span class="line">    Sheets.Add</span><br><span class="line">    ActiveSheet.Name = <span class="string">&quot;第&quot;</span> &amp; i &amp; <span class="string">&quot;张表&quot;</span></span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
-
-<p>2、删除一张工作表<br>手动操作：选中一个当前存在的工作表，然后右键点击“删除”。当然，当前的工作簿文件中至少存在2个工作表才能这么操作，原因相信你懂的；<br>VBA语言：<code>Sheet2.Delete</code>（原有工作簿中存在2个工作表：sheet1和sheet2，此操作是将sheet2工作表删除）<br>删除工作表时，会弹出一个警告对话框，手动操作时，都是一一点击“确定”。<br>但是VBA实现删除操作，如果还是需要手动删除的话，则变得半自动了，无法充分发挥编程语言的作用，所以此处有必要提起这么一段代码：<code>Application.DisplayAlerts = False</code>（意思就是将主程序的显示告警框设置为false，也就是不显示），当然，表格删除完成后，别忘再恢复：<code>Application.DisplayAlerts = True</code></p>
-<p>3、选择一张工作表<br>手动操作：左键选中即可完成此操作；<br>VBA语言：<code>Sheet4.Select</code>（假如工作簿中存在6个工作表，此操作就是选中表名为“sheet4”的那张表）</p>
-<p>4、复制工作表<br>手动操作：选中一个当前存在的你想要复制的工作表，然后右键点击“移动或复制”，随后勾选“建立副本”，复制后新生成的副本，具体放在什么位置可选（可以选择不同工作簿，也可以直接在当前工作簿中插入）<br>VBA语言：复制的工作表的工作表的操作，VBA实现时，需要注意：<br><code>Sheet6.Copy</code>是对sheet6进行复制，但是会新建一个工作簿文件，然后将复制后的sheet6副本放在里面；<br><code>Sheet6.Copy after:=Sheet10</code>才是在当前工作簿的sheet10工作表后面插入sheet6的副本</p>
-<p>好了，以上就是EXCEL工作表涉及到的基本操作所对应的VBA代码，感觉怎样？动手试试吧。</p>
-
+        <p>前面说到，打开了EXCEL文件后，你就可以为所欲为，做自己想做的事情了。<br>今天就来说说这个事儿。
+        
+          <p class="article-more-link">
+            <a href="/2021/02/26/VBA%E5%AD%A6%E4%B9%A0%EF%BC%884%EF%BC%89/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/26/VBA%E5%AD%A6%E4%B9%A0%EF%BC%884%EF%BC%89/" data-id="cklrcodj7000a9cu15en1hs5i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/26/VBA%E5%AD%A6%E4%B9%A0%EF%BC%884%EF%BC%89/" data-id="cklrcz0kl000ag8u141y28cuh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%AD%A6%E4%B9%A0/" rel="tag">VBA学习</a></li></ul>
@@ -354,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/26/VBA%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/" data-id="cklrcodj500089cu1h41ec5l6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/26/VBA%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/" data-id="cklrcz0kk0009g8u17vfce8gd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%AD%A6%E4%B9%A0/" rel="tag">VBA学习</a></li></ul>
@@ -373,7 +357,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%84%9F%E6%82%9F/">编程感悟</a>
   </div>
 
   </div>
@@ -403,7 +387,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/25/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%BF%83%E7%90%86%E6%8C%89%E6%91%A9%E7%AF%87%EF%BC%89/" data-id="cklrcodjm000y9cu1f4az4njl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/25/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%BF%83%E7%90%86%E6%8C%89%E6%91%A9%E7%AF%87%EF%BC%89/" data-id="cklrcz0kz000yg8u1689r48da" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%84%9F%E6%82%9F/" rel="tag">感悟</a></li></ul>
@@ -451,7 +435,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/25/python%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" data-id="cklrcodjj000s9cu11jia3npf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/25/python%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" data-id="cklrcz0kw000sg8u1fp4eb48a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">python常用代码</a></li></ul>
@@ -489,9 +473,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>上次的小试牛刀，让我爽了一把，这次我想静下心来，看看这些代码都是什么意思，怎么就实现了文件的打开，处理了呢？<br>先从简单的开始吧，还记得打开单个文件的代码吗：</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&#x27;选取单个文件打开后，处理并关闭</span></span><br><span class="line"><span class="keyword">Sub</span> test()</span><br><span class="line">    <span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line">    <span class="keyword">Dim</span> wb <span class="keyword">As</span> Workbook</span><br><span class="line">    str = Application.GetOpenFilename(<span class="string">&quot;Excel文件,*.xls*&quot;</span>, , <span class="string">&quot;请选择&quot;</span>)</span><br><span class="line">    <span class="keyword">Set</span> wb = Workbooks.Open(str)</span><br><span class="line"><span class="comment">&#x27;###################&#x27;这里针对打开的文件进行操作&#x27;##########</span></span><br><span class="line">    wb.save    </span><br><span class="line">    wb.Close</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
-<p>就从这个开始吧
+        <p>上次的小试牛刀，让我爽了一把，这次我想静下心来，看看这些代码都是什么意思，怎么就实现了文件的打开，处理了呢？<br>先从简单的开始吧，还记得打开单个文件的代码吗：
         
           <p class="article-more-link">
             <a href="/2021/02/25/VBA%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/#more">Read More</a>
@@ -500,7 +482,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/25/VBA%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" data-id="cklrcodj600099cu19f8rct0g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/25/VBA%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" data-id="cklrcz0ki0007g8u1e8ay64nv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%AD%A6%E4%B9%A0/" rel="tag">VBA学习</a></li></ul>
@@ -551,7 +533,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/24/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/" data-id="cklrcodjl000v9cu14az1h9y4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/24/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9/" data-id="cklrcz0kx000vg8u18alb1z5s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B6%B3%E8%BF%B9/" rel="tag">足迹</a></li></ul>
@@ -576,7 +558,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%84%9F%E6%82%9F/">编程感悟</a></li></ul>
     </div>
   </div>
 

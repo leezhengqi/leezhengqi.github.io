@@ -5,15 +5,15 @@
   
   <title>VBA学习（工作簿对象操作） | lee的编程小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本篇主要涉及EXCEL工作簿文件的相关操作。如果你经常与EXCEL表格打交道，这部分的操作应该最熟悉不过了，基本操作无非是文件新建、打开、保存、关闭。那么倘若用VBA代码实现，或者说翻译成VBA语言的话，又会是什么样的呢？以下咱们就一 一来看：1、新建工作簿文件（Add）VBA代码：Workbooks.Add2、保存工作簿文件（Save）VBA代码：ActiveWorkbook.Save即表示将1">
+  <meta name="description" content="本篇主要涉及EXCEL工作簿文件的相关操作。如果你经常与EXCEL表格打交道，这部分的操作应该最熟悉不过了，基本操作无非是文件新建、打开、保存、关闭。那么倘若用VBA代码实现，或者说翻译成VBA语言的话，又会是什么样的呢？以下咱们就一 一来看：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VBA学习（工作簿对象操作）">
 <meta property="og:url" content="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/index.html">
 <meta property="og:site_name" content="lee的编程小屋">
-<meta property="og:description" content="本篇主要涉及EXCEL工作簿文件的相关操作。如果你经常与EXCEL表格打交道，这部分的操作应该最熟悉不过了，基本操作无非是文件新建、打开、保存、关闭。那么倘若用VBA代码实现，或者说翻译成VBA语言的话，又会是什么样的呢？以下咱们就一 一来看：1、新建工作簿文件（Add）VBA代码：Workbooks.Add2、保存工作簿文件（Save）VBA代码：ActiveWorkbook.Save即表示将1">
+<meta property="og:description" content="本篇主要涉及EXCEL工作簿文件的相关操作。如果你经常与EXCEL表格打交道，这部分的操作应该最熟悉不过了，基本操作无非是文件新建、打开、保存、关闭。那么倘若用VBA代码实现，或者说翻译成VBA语言的话，又会是什么样的呢？以下咱们就一 一来看：">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-02-27T01:17:47.627Z">
-<meta property="article:modified_time" content="2021-03-01T09:37:13.132Z">
+<meta property="article:modified_time" content="2021-03-02T01:53:15.154Z">
 <meta property="article:author" content="leezhengqi">
 <meta property="article:tag" content="VBA学习">
 <meta name="twitter:card" content="summary">
@@ -97,7 +97,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本篇主要涉及EXCEL工作簿文件的相关操作。<br>如果你经常与EXCEL表格打交道，这部分的操作应该最熟悉不过了，基本操作无非是文件新建、打开、保存、关闭。<br>那么倘若用VBA代码实现，或者说翻译成VBA语言的话，又会是什么样的呢？以下咱们就一 一来看：<br>1、新建工作簿文件（Add）<br>VBA代码：<code>Workbooks.Add</code><br>2、保存工作簿文件（Save）<br>VBA代码：<code>ActiveWorkbook.Save</code>即表示将1、中新建的工作簿文件进行保存（因为刚刚建好，处于激活状态，所以用<code>ActiveWorkbook</code>进行指代）<br>3、将工作簿文件另存为（SaveAs）<br>VBA代码：<code>ActiveWorkbook.SaveAs Filename:=&quot;d:\test111.xlsx&quot;</code>，实际场景中，咱们创建一个新的EXCEL工作簿文件，一般会将其另存到指定的路径下，此段代码就是将上述创建的文件另存到D盘根目录下，同时将文件重命名为test111<br>4、打开工作簿文件（Open）<br>VBA代码：<code>Workbooks.Open Filename:=&quot;d:\test111.xlsx&quot;</code>即表示将D盘根目录下，名字是test111的xlsx文件打开。<br>5、关闭工作簿文件（Close）<br>VBA代码：<code>ActiveWorkbook.Close</code>将打开的当前的EXCEL工作簿文件关闭。</p>
+        <p>本篇主要涉及EXCEL工作簿文件的相关操作。<br>如果你经常与EXCEL表格打交道，这部分的操作应该最熟悉不过了，基本操作无非是文件新建、打开、保存、关闭。<br>那么倘若用VBA代码实现，或者说翻译成VBA语言的话，又会是什么样的呢？以下咱们就一 一来看：<span id="more"></span><br>1、新建工作簿文件（Add）<br>VBA代码：<code>Workbooks.Add</code><br>2、保存工作簿文件（Save）<br>VBA代码：<code>ActiveWorkbook.Save</code>即表示将1、中新建的工作簿文件进行保存（因为刚刚建好，处于激活状态，所以用<code>ActiveWorkbook</code>进行指代）<br>3、将工作簿文件另存为（SaveAs）<br>VBA代码：<code>ActiveWorkbook.SaveAs Filename:=&quot;d:\test111.xlsx&quot;</code>，实际场景中，咱们创建一个新的EXCEL工作簿文件，一般会将其另存到指定的路径下，此段代码就是将上述创建的文件另存到D盘根目录下，同时将文件重命名为test111<br>4、打开工作簿文件（Open）<br>VBA代码：<code>Workbooks.Open Filename:=&quot;d:\test111.xlsx&quot;</code>即表示将D盘根目录下，名字是test111的xlsx文件打开。<br>5、关闭工作簿文件（Close）<br>VBA代码：<code>ActiveWorkbook.Close</code>将打开的当前的EXCEL工作簿文件关闭。</p>
 <p>前面已经提到过，无论是工作簿还是工作表或者单元格，在VBA大家庭里，都是一个个对象，那么经常看到的“对象.Add”或“对象.Save”，其实就是针对对象进行的相关操作。<br>但不知你发现没，上述5种常见操作虽然都是针对EXCEL工作簿文件进行的，有的时候对象用的是<code>Workbooks</code>，比如<code>Workbooks.Add</code>，但有时又用<code>ActiveWorkbook</code>，比如<code>ActiveWorkbook.Save</code>。两者最大的区别就在于前者是泛指工作簿这样的对象，因为此时还没创建具体的工作簿文件，而后者则是具体的已经创建完成的工作簿文件。</p>
 <p>简言之，前者是泛指的对象，后者则是具体的对象。<br>不仅工作簿如此，工作表也是这样，比如新建一个工作表，代码为：<code>Sheets.Add</code>，若是已经存在的工作表，则可以直接进行操作，比如<code>Sheet1.Name = &quot;test&quot;</code>即是将目前的sheet1的表名修改为test。</p>
 <p>最后，咱们一起来做个练习，要求是这样的：<br>新建一个EXCEL工作簿文件，并在其中第一张工作表的A1单元格内填入“OK”，然后另存为到D盘，并命名为test.xlsx<br>VBA代码如下：</p>
@@ -108,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/" data-id="cklrcodjd000g9cu11uhc4ls8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/" data-id="cklrcz0ko000eg8u1hf052jmo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%AD%A6%E4%B9%A0/" rel="tag">VBA学习</a></li></ul>
@@ -147,7 +147,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%84%9F%E6%82%9F/">编程感悟</a></li></ul>
     </div>
   </div>
 

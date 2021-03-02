@@ -5,15 +5,15 @@
   
   <title>VBA学习（第2篇） | lee的编程小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="上次的小试牛刀，让我爽了一把，这次我想静下心来，看看这些代码都是什么意思，怎么就实现了文件的打开，处理了呢？先从简单的开始吧，还记得打开单个文件的代码吗： 12345678910&amp;#x27;选取单个文件打开后，处理并关闭Sub test()    Dim str As String    Dim wb As Workbook    str &#x3D; Application.GetOpenFilename">
+  <meta name="description" content="上次的小试牛刀，让我爽了一把，这次我想静下心来，看看这些代码都是什么意思，怎么就实现了文件的打开，处理了呢？先从简单的开始吧，还记得打开单个文件的代码吗：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VBA学习（第2篇）">
 <meta property="og:url" content="http://yoursite.com/2021/02/25/VBA%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/index.html">
 <meta property="og:site_name" content="lee的编程小屋">
-<meta property="og:description" content="上次的小试牛刀，让我爽了一把，这次我想静下心来，看看这些代码都是什么意思，怎么就实现了文件的打开，处理了呢？先从简单的开始吧，还记得打开单个文件的代码吗： 12345678910&amp;#x27;选取单个文件打开后，处理并关闭Sub test()    Dim str As String    Dim wb As Workbook    str &#x3D; Application.GetOpenFilename">
+<meta property="og:description" content="上次的小试牛刀，让我爽了一把，这次我想静下心来，看看这些代码都是什么意思，怎么就实现了文件的打开，处理了呢？先从简单的开始吧，还记得打开单个文件的代码吗：">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-02-24T22:13:27.382Z">
-<meta property="article:modified_time" content="2021-03-01T10:22:30.943Z">
+<meta property="article:modified_time" content="2021-03-02T01:52:35.184Z">
 <meta property="article:author" content="leezhengqi">
 <meta property="article:tag" content="VBA学习">
 <meta name="twitter:card" content="summary">
@@ -97,9 +97,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>上次的小试牛刀，让我爽了一把，这次我想静下心来，看看这些代码都是什么意思，怎么就实现了文件的打开，处理了呢？<br>先从简单的开始吧，还记得打开单个文件的代码吗：</p>
+        <p>上次的小试牛刀，让我爽了一把，这次我想静下心来，看看这些代码都是什么意思，怎么就实现了文件的打开，处理了呢？<br>先从简单的开始吧，还记得打开单个文件的代码吗：<span id="more"></span></p>
 <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&#x27;选取单个文件打开后，处理并关闭</span></span><br><span class="line"><span class="keyword">Sub</span> test()</span><br><span class="line">    <span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line">    <span class="keyword">Dim</span> wb <span class="keyword">As</span> Workbook</span><br><span class="line">    str = Application.GetOpenFilename(<span class="string">&quot;Excel文件,*.xls*&quot;</span>, , <span class="string">&quot;请选择&quot;</span>)</span><br><span class="line">    <span class="keyword">Set</span> wb = Workbooks.Open(str)</span><br><span class="line"><span class="comment">&#x27;###################&#x27;这里针对打开的文件进行操作&#x27;##########</span></span><br><span class="line">    wb.save    </span><br><span class="line">    wb.Close</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
-<p>就从这个开始吧<span id="more"></span></p>
+<p>就从这个开始吧<!--more--></p>
 <p>先说下VBA代码的构成。sub XXX()和End Sub是成对出现的，它们定义了一个过程，也就是一组动作，所有的VBA代码都是被它们框在里面的。XXX是过程名，可根据自己的需要命名，一般是代表这个过程所实现的功能的关键词。</p>
 <p>接下来里面的内容，一一来说一下：</p>
 <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"><span class="keyword">Dim</span> wb <span class="keyword">As</span> Workbook</span><br></pre></td></tr></table></figure>
@@ -115,7 +115,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/25/VBA%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" data-id="cklrcodj600099cu19f8rct0g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/25/VBA%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" data-id="cklrcz0ki0007g8u1e8ay64nv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%AD%A6%E4%B9%A0/" rel="tag">VBA学习</a></li></ul>
@@ -154,7 +154,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%84%9F%E6%82%9F/">编程感悟</a></li></ul>
     </div>
   </div>
 

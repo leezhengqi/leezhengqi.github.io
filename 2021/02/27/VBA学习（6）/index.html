@@ -5,15 +5,15 @@
   
   <title>VBA学习（单元格对象操作） | lee的编程小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前面讲完了EXCEL工作簿和工作表常见操作对应的VBA代码，今天这篇主要讲解的内容是单元格的操作所对应的VBA代码，也是学习VBA的重头戏内容。因为无论是在工作表中编辑数据，还是从工作表中读取数据，归根结底，是需要对单元格进行操作，因为所有的数据都是写在一个个单元格里面的。以下分为三个大的部分进行讲解： 1、单元格的常见表示方式 123[A1]Range(&quot;A1&quot;)Cells(">
+  <meta name="description" content="前面讲完了EXCEL工作簿和工作表常见操作对应的VBA代码，今天这篇主要讲解的内容是单元格的操作所对应的VBA代码，也是学习VBA的重头戏内容。因为无论是在工作表中编辑数据，还是从工作表中读取数据，归根结底，是需要对单元格进行操作，因为所有的数据都是写在一个个单元格里面的。以下分为三个大的部分进行讲解：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VBA学习（单元格对象操作）">
 <meta property="og:url" content="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/index.html">
 <meta property="og:site_name" content="lee的编程小屋">
-<meta property="og:description" content="前面讲完了EXCEL工作簿和工作表常见操作对应的VBA代码，今天这篇主要讲解的内容是单元格的操作所对应的VBA代码，也是学习VBA的重头戏内容。因为无论是在工作表中编辑数据，还是从工作表中读取数据，归根结底，是需要对单元格进行操作，因为所有的数据都是写在一个个单元格里面的。以下分为三个大的部分进行讲解： 1、单元格的常见表示方式 123[A1]Range(&quot;A1&quot;)Cells(">
+<meta property="og:description" content="前面讲完了EXCEL工作簿和工作表常见操作对应的VBA代码，今天这篇主要讲解的内容是单元格的操作所对应的VBA代码，也是学习VBA的重头戏内容。因为无论是在工作表中编辑数据，还是从工作表中读取数据，归根结底，是需要对单元格进行操作，因为所有的数据都是写在一个个单元格里面的。以下分为三个大的部分进行讲解：">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-02-27T01:21:08.952Z">
-<meta property="article:modified_time" content="2021-03-02T01:37:09.930Z">
+<meta property="article:modified_time" content="2021-03-02T01:53:24.929Z">
 <meta property="article:author" content="leezhengqi">
 <meta property="article:tag" content="VBA学习">
 <meta name="twitter:card" content="summary">
@@ -97,7 +97,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前面讲完了EXCEL工作簿和工作表常见操作对应的VBA代码，今天这篇主要讲解的内容是单元格的操作所对应的VBA代码，也是学习VBA的重头戏内容。<br>因为无论是在工作表中编辑数据，还是从工作表中读取数据，归根结底，是需要对单元格进行操作，因为所有的数据都是写在一个个单元格里面的。<br>以下分为三个大的部分进行讲解：</p>
+        <p>前面讲完了EXCEL工作簿和工作表常见操作对应的VBA代码，今天这篇主要讲解的内容是单元格的操作所对应的VBA代码，也是学习VBA的重头戏内容。<br>因为无论是在工作表中编辑数据，还是从工作表中读取数据，归根结底，是需要对单元格进行操作，因为所有的数据都是写在一个个单元格里面的。<br>以下分为三个大的部分进行讲解：<span id="more"></span></p>
 <p>1、单元格的常见表示方式</p>
 <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[A1]</span><br><span class="line">Range(<span class="string">&quot;A1&quot;</span>)</span><br><span class="line">Cells(<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <p>是的，你没看错，上面的3种方式指代的都是单元格A1，就是工作表左上角的那个。这和咱们手动操作不同，如果直接选中A1单元格，看到的就是A1。<br>至于为什么会有这么多表示方式，VBA自有它的妙用，在这里，只需了解一下，混个眼熟，待咱们把另外2个部分的知识学完，最后再实操一下，进一步理解并体会这么多表示方式的好处。</p>
@@ -112,7 +112,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/" data-id="cklrcodjb000e9cu1h63od67v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/" data-id="cklrcz0kq000gg8u14obi5oql" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%AD%A6%E4%B9%A0/" rel="tag">VBA学习</a></li></ul>
@@ -151,7 +151,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%84%9F%E6%82%9F/">编程感悟</a></li></ul>
     </div>
   </div>
 
