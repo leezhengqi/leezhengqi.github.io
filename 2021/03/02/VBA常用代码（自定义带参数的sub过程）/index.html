@@ -5,15 +5,15 @@
   
   <title>VBA常用代码（自定义带参数的sub过程） | lee的编程小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="看了这么多VBA代码，相信你应该比较熟悉这个结构了： 123Sub 过程名()End Sub 前面也讲过，这在VBA里面称为“一个过程”。所有需要做的操作都包含在过程中，也就是夹在Sub 过程名()和End Sub之间。我们之前看到的代码，无一例外，Sub 过程名()的括号中是空的，也就是不带任何参数的，实际使用时，可能存在与外部交互，也就是sub过程中的用到的变量，需要从外部输入才能确定的情况，">
+  <meta name="description" content="看了这么多VBA代码，相信你应该比较熟悉这个结构了： 123Sub 过程名()..........End Sub 前面也讲过，这在VBA里面称为“一个过程”。所有需要做的操作都包含在过程中，也就是夹在Sub 过程名()和End Sub之间。我们之前看到的代码，无一例外，Sub 过程名()的括号中是空的，也就是不带任何参数的，实际使用时，可能存在与外部交互，也就是sub过程中的用到的变量，需要从外部">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VBA常用代码（自定义带参数的sub过程）">
 <meta property="og:url" content="http://yoursite.com/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84sub%E8%BF%87%E7%A8%8B%EF%BC%89/index.html">
 <meta property="og:site_name" content="lee的编程小屋">
-<meta property="og:description" content="看了这么多VBA代码，相信你应该比较熟悉这个结构了： 123Sub 过程名()End Sub 前面也讲过，这在VBA里面称为“一个过程”。所有需要做的操作都包含在过程中，也就是夹在Sub 过程名()和End Sub之间。我们之前看到的代码，无一例外，Sub 过程名()的括号中是空的，也就是不带任何参数的，实际使用时，可能存在与外部交互，也就是sub过程中的用到的变量，需要从外部输入才能确定的情况，">
+<meta property="og:description" content="看了这么多VBA代码，相信你应该比较熟悉这个结构了： 123Sub 过程名()..........End Sub 前面也讲过，这在VBA里面称为“一个过程”。所有需要做的操作都包含在过程中，也就是夹在Sub 过程名()和End Sub之间。我们之前看到的代码，无一例外，Sub 过程名()的括号中是空的，也就是不带任何参数的，实际使用时，可能存在与外部交互，也就是sub过程中的用到的变量，需要从外部">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-03-02T07:40:30.743Z">
-<meta property="article:modified_time" content="2021-03-02T08:23:09.200Z">
+<meta property="article:modified_time" content="2021-03-02T09:58:10.358Z">
 <meta property="article:author" content="leezhengqi">
 <meta property="article:tag" content="VBA常用代码">
 <meta name="twitter:card" content="summary">
@@ -98,8 +98,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>看了这么多VBA代码，相信你应该比较熟悉这个结构了：</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 过程名()</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
-<p>前面也讲过，这在VBA里面称为“一个过程”。所有需要做的操作都包含在过程中，也就是夹在<code>Sub 过程名()</code>和<code>End Sub</code>之间。<br>我们之前看到的代码，无一例外，<code>Sub 过程名()</code>的括号中是空的，也就是不带任何参数的，实际使用时，可能存在与外部交互，也就是sub过程中的用到的变量，需要从外部输入才能确定的情况，那该怎么办？<br>解决办法就是：自定义一个待参数的sub过程。按照惯例，先上代码：</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 过程名()</span><br><span class="line">..........</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>前面也讲过，这在VBA里面称为“一个过程”。所有需要做的操作都包含在过程中，也就是夹在<code>Sub 过程名()</code>和<code>End Sub</code>之间。<br>我们之前看到的代码，无一例外，<code>Sub 过程名()</code>的括号中是空的，也就是不带任何参数的，实际使用时，可能存在与外部交互，也就是sub过程中的用到的变量，需要从外部输入才能确定的情况，那该怎么办？<span id="more"></span><br>解决办法就是：自定义一个待参数的sub过程。按照惯例，先上代码：</p>
 <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 创建表(str <span class="keyword">As</span> <span class="type">String</span>)</span><br><span class="line"><span class="keyword">Dim</span> sht <span class="keyword">As</span> Worksheet</span><br><span class="line"><span class="keyword">For</span> <span class="keyword">Each</span> sht <span class="keyword">In</span> Sheets</span><br><span class="line">    <span class="keyword">If</span> sht.Name = str <span class="keyword">Then</span></span><br><span class="line">        k = <span class="number">1</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"><span class="keyword">If</span> k = <span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">    Sheets.Add after:=Sheets(Sheets.Count)</span><br><span class="line">    Sheets(Sheets.Count).Name = str</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
 <p>上述代码的意思就是，新建工作表，并将工作表命名为str，前提是当现有文件中存在同名str的工作表时，不创建。<br>为什么要自定义这种带参数的sub过程呢，刚才上面提到了一点，下面再通过具体的例子，理解一下：</p>
 <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 创建工作表并命名()</span><br><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line">str = InputBox(<span class="string">&quot;请输入要创建工作表的名字&quot;</span>)</span><br><span class="line"><span class="keyword">Call</span> 创建表(str)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
@@ -109,7 +109,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84sub%E8%BF%87%E7%A8%8B%EF%BC%89/" data-id="cklrqzeym0001x0u13ved89jk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84sub%E8%BF%87%E7%A8%8B%EF%BC%89/" data-id="cklru94k5000riwu1e8957sz3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">VBA常用代码</a></li></ul>
