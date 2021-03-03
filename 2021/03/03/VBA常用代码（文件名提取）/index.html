@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>python之爱在心口难开 | lee的编程小屋</title>
+  <title>VBA常用代码（文件名提取） | lee的编程小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="人生苦短，我用Python  记得Python大火的那段时间，到处都是催生荷尔蒙激素的宣传语，冲动之下，我入“坑”了。鸡血了一阵子，根据课程的进度，打卡学习，不可否认，也学了一些东西，但是最初的激情随着时间的推移，开始慢慢消退。其中一个关键因素是：用不到。如今想来，最容易导致学习半途而废的，恐怕非它莫属了。试想，每天只进不出，是啥感觉？行走的“貔貅”吗！">
+  <meta name="description" content="日常工作中，有时需要读取某个文件夹下的所有文件名，然后将获取的结果放在一张表中，作为文件清单。这个需求使用VBA应该如何实现呢？按照习惯，先梳理下一下做这个事情的逻辑：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python之爱在心口难开">
-<meta property="og:url" content="http://yoursite.com/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:title" content="VBA常用代码（文件名提取）">
+<meta property="og:url" content="http://yoursite.com/2021/03/03/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E6%96%87%E4%BB%B6%E5%90%8D%E6%8F%90%E5%8F%96%EF%BC%89/index.html">
 <meta property="og:site_name" content="lee的编程小屋">
-<meta property="og:description" content="人生苦短，我用Python  记得Python大火的那段时间，到处都是催生荷尔蒙激素的宣传语，冲动之下，我入“坑”了。鸡血了一阵子，根据课程的进度，打卡学习，不可否认，也学了一些东西，但是最初的激情随着时间的推移，开始慢慢消退。其中一个关键因素是：用不到。如今想来，最容易导致学习半途而废的，恐怕非它莫属了。试想，每天只进不出，是啥感觉？行走的“貔貅”吗！">
+<meta property="og:description" content="日常工作中，有时需要读取某个文件夹下的所有文件名，然后将获取的结果放在一张表中，作为文件清单。这个需求使用VBA应该如何实现呢？按照习惯，先梳理下一下做这个事情的逻辑：">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-03-02T03:14:28.672Z">
-<meta property="article:modified_time" content="2021-03-02T06:09:16.950Z">
+<meta property="article:published_time" content="2021-03-03T08:56:12.661Z">
+<meta property="article:modified_time" content="2021-03-03T09:30:02.287Z">
 <meta property="article:author" content="leezhengqi">
-<meta property="article:tag" content="足迹">
+<meta property="article:tag" content="VBA常用代码">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="lee的编程小屋" type="application/atom+xml">
@@ -71,14 +71,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-python学习（1）" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-VBA常用代码（文件名提取）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" class="article-date">
-  <time datetime="2021-03-02T03:14:28.672Z" itemprop="datePublished">2021-03-02</time>
+    <a href="/2021/03/03/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E6%96%87%E4%BB%B6%E5%90%8D%E6%8F%90%E5%8F%96%EF%BC%89/" class="article-date">
+  <time datetime="2021-03-03T08:56:12.661Z" itemprop="datePublished">2021-03-03</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%B6%B3%E8%BF%B9/">编程足迹</a>
+    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/">常用代码</a>
   </div>
 
   </div>
@@ -89,7 +89,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      python之爱在心口难开
+      VBA常用代码（文件名提取）
     </h1>
   
 
@@ -97,21 +97,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong><font color='red'> 人生苦短，我用Python </font></strong></p>
-<p>记得Python大火的那段时间，到处都是催生荷尔蒙激素的宣传语，冲动之下，我入“坑”了。<br>鸡血了一阵子，根据课程的进度，打卡学习，不可否认，也学了一些东西，但是最初的激情随着时间的推移，开始慢慢消退。<br>其中一个关键因素是：用不到。如今想来，最容易导致学习半途而废的，恐怕非它莫属了。试想，每天只进不出，是啥感觉？行走的“貔貅”吗！<span id="more"></span></p>
-<p>实际上，在这背后，更深层次的原因是没有反馈。不管什么事情，若想持续下去，即时反馈既重要又必要，因为这能让你意识到：哦，这个玩意用在这个地方，蛮不错的，我得好好学。总之，无论是自身获得的成就感，还是来自外部的认可，都会是你坚持下去的动力。<br>当初没能认识到这一点，所以我的第一次Python之旅，还没怎么开始，就宣告结束了。</p>
-<p>时光荏苒，斗转星移。</p>
-<p>编程这玩意就像勾子一样，深深地埋在了我的心头，说不定什么时候就会被“勾引”出来。<br>这次被“勾引”，再次启动python学习，缘起于老胥不经意间说起的一句话。</p>
-<p>老胥何许人也？<br>之前文章里提到的编程大神，是也！<br>他说，抛开什么大数据，人工智能的不谈，就说日常办公这方面。如今Wps用的人越来越多，而VBA虽然在office里用起来很方便，但wps对它却不太友好。而python就没有这样的限制了，叫他万能胶水语言，一点也不为过。<br>而且，python学起来不难，因为它的语法比较接近自然语言，只要你逻辑思路够清楚，又不对英语有很大反感，任何人都可以学会。</p>
-<p>说实话，最后这句给我吃了个定心丸。于是，开始蠢蠢欲动，摩拳擦掌。<br>但真正地再次踏上python学习之旅，还是随后出现的一件事，引发的。<br>欲知后事如何，请听下回分解。<br><a target="_blank" rel="noopener" href="https://leezhengqi.github.io/2021/02/25/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/">python初体验</a></p>
+        <p>日常工作中，有时需要读取某个文件夹下的所有文件名，然后将获取的结果放在一张表中，作为文件清单。这个需求使用VBA应该如何实现呢？<br>按照习惯，先梳理下一下做这个事情的逻辑：<span id="more"></span></p>
+<blockquote>
+<p>1、创建一个EXCEL文件，也就是保证后面获取的结果有地方存放；<br>2、获取指定文件夹下的文件名；<br>3、写入到第1步创建的工作表的单元格中。（注意：文件夹下有多个文件的话，这一步涉及到循环）</p>
+</blockquote>
+<p>以下是VBA代码实现，有两种方式，你可以实际执行下，对比体会一下它们之间的区别：</p>
+<p><strong>第一种方式：</strong></p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 提取指定路径下的文件名()</span><br><span class="line"><span class="keyword">Dim</span> i <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">Dim</span> str <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line">Workbooks.Add</span><br><span class="line">str = Dir(<span class="string">&quot;D:\For Damon\*.*&quot;</span>)</span><br><span class="line"><span class="keyword">For</span> i = <span class="number">1</span> <span class="keyword">To</span> <span class="number">100</span></span><br><span class="line">    ActiveSheet.Range(<span class="string">&quot;a&quot;</span> &amp; i) = str</span><br><span class="line">    str = Dir</span><br><span class="line">    <span class="keyword">If</span> str = <span class="string">&quot;&quot;</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Exit</span> <span class="keyword">For</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p><strong>第二种方式</strong></p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 提取打开路径下的文件名()</span><br><span class="line"><span class="keyword">Dim</span> str()</span><br><span class="line"><span class="keyword">Dim</span> i <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span> <span class="comment">&#x27;用户点取消时，避免报错</span></span><br><span class="line">str = Application.GetOpenFilename(<span class="string">&quot;,*.*&quot;</span>, , , , <span class="literal">True</span>)</span><br><span class="line">Workbooks.Add</span><br><span class="line">    <span class="keyword">For</span> i = LBound(str) <span class="keyword">To</span> UBound(str)</span><br><span class="line">    ActiveSheet.Range(<span class="string">&quot;a&quot;</span> &amp; i) = str(i)</span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>将上述代码复制到VBA里面，运行一下，看看有什么区别。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" data-id="cklru94ka0012iwu1bpi816kf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/03/03/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E6%96%87%E4%BB%B6%E5%90%8D%E6%8F%90%E5%8F%96%EF%BC%89/" data-id="cklt8oi9q0000i4u13kmndtts" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B6%B3%E8%BF%B9/" rel="tag">足迹</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">VBA常用代码</a></li></ul>
 
     </footer>
   </div>
@@ -119,19 +122,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          VBA常用代码（删除操作）
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E6%8B%86%E5%88%86%E4%B8%8E%E7%AD%9B%E9%80%89%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/03/03/python%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">VBA常用代码（表格拆分&amp;筛选）</div>
+      <div class="article-nav-title">python学习（编程入口）</div>
     </a>
   
 </nav>
