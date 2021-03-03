@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>VBA学习（工作簿对象操作） | lee的编程小屋</title>
+  <title>python学习（编程入口） | lee的编程小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本篇主要涉及EXCEL工作簿文件的相关操作。如果你经常与EXCEL表格打交道，这部分的操作应该最熟悉不过了，基本操作无非是文件新建、打开、保存、关闭。那么倘若用VBA代码实现，或者说翻译成VBA语言的话，又会是什么样的呢？以下咱们就一 一来看：">
+  <meta name="description" content="通过入门篇的学习，咱们一起基本压清了程序的概念，也知道了这玩意其实并不神秘，只是需要花些时间而已，只需按照入门篇里的学习导图逐步深入学习而已。 本来这样按部就班地学下去就可以了，但是学习过程中我发现，由于涉及到知识点过多，一不小心就会陷入到细节中，纠结于一些细枝末节，结果反倒耽误了很多时间，再加上如果总是学一些很碎片的点，却不知道这些点串起来能实现什么东西的话，时间长了，学习的热情就会慢慢消退。打">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VBA学习（工作簿对象操作）">
-<meta property="og:url" content="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/index.html">
+<meta property="og:title" content="python学习（编程入口）">
+<meta property="og:url" content="http://yoursite.com/2021/03/03/python%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/index.html">
 <meta property="og:site_name" content="lee的编程小屋">
-<meta property="og:description" content="本篇主要涉及EXCEL工作簿文件的相关操作。如果你经常与EXCEL表格打交道，这部分的操作应该最熟悉不过了，基本操作无非是文件新建、打开、保存、关闭。那么倘若用VBA代码实现，或者说翻译成VBA语言的话，又会是什么样的呢？以下咱们就一 一来看：">
+<meta property="og:description" content="通过入门篇的学习，咱们一起基本压清了程序的概念，也知道了这玩意其实并不神秘，只是需要花些时间而已，只需按照入门篇里的学习导图逐步深入学习而已。 本来这样按部就班地学下去就可以了，但是学习过程中我发现，由于涉及到知识点过多，一不小心就会陷入到细节中，纠结于一些细枝末节，结果反倒耽误了很多时间，再加上如果总是学一些很碎片的点，却不知道这些点串起来能实现什么东西的话，时间长了，学习的热情就会慢慢消退。打">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-02-27T01:17:47.627Z">
-<meta property="article:modified_time" content="2021-03-02T06:21:00.983Z">
+<meta property="article:published_time" content="2021-03-03T06:59:30.068Z">
+<meta property="article:modified_time" content="2021-03-03T08:38:55.099Z">
 <meta property="article:author" content="leezhengqi">
-<meta property="article:tag" content="VBA基础知识">
+<meta property="article:tag" content="python基础知识">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="lee的编程小屋" type="application/atom+xml">
@@ -71,10 +71,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-VBA学习（5）" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-python学习（3）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/" class="article-date">
-  <time datetime="2021-02-27T01:17:47.627Z" itemprop="datePublished">2021-02-27</time>
+    <a href="/2021/03/03/python%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/" class="article-date">
+  <time datetime="2021-03-03T06:59:30.068Z" itemprop="datePublished">2021-03-03</time>
 </a>
     
   <div class="article-category">
@@ -89,7 +89,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      VBA学习（工作簿对象操作）
+      python学习（编程入口）
     </h1>
   
 
@@ -97,21 +97,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本篇主要涉及EXCEL工作簿文件的相关操作。<br>如果你经常与EXCEL表格打交道，这部分的操作应该最熟悉不过了，基本操作无非是文件新建、打开、保存、关闭。<br>那么倘若用VBA代码实现，或者说翻译成VBA语言的话，又会是什么样的呢？以下咱们就一 一来看：<span id="more"></span><br>1、新建工作簿文件（Add）<br>VBA代码：<code>Workbooks.Add</code><br>2、保存工作簿文件（Save）<br>VBA代码：<code>ActiveWorkbook.Save</code>即表示将1、中新建的工作簿文件进行保存（因为刚刚建好，处于激活状态，所以用<code>ActiveWorkbook</code>进行指代）<br>3、将工作簿文件另存为（SaveAs）<br>VBA代码：<code>ActiveWorkbook.SaveAs Filename:=&quot;d:\test111.xlsx&quot;</code>，实际场景中，咱们创建一个新的EXCEL工作簿文件，一般会将其另存到指定的路径下，此段代码就是将上述创建的文件另存到D盘根目录下，同时将文件重命名为test111<br>4、打开工作簿文件（Open）<br>VBA代码：<code>Workbooks.Open Filename:=&quot;d:\test111.xlsx&quot;</code>即表示将D盘根目录下，名字是test111的xlsx文件打开。<br>5、关闭工作簿文件（Close）<br>VBA代码：<code>ActiveWorkbook.Close</code>将打开的当前的EXCEL工作簿文件关闭。</p>
-<p>前面已经提到过，无论是工作簿还是工作表或者单元格，在VBA大家庭里，都是一个个对象，那么经常看到的“对象.Add”或“对象.Save”，其实就是针对对象进行的相关操作。<br>但不知你发现没，上述5种常见操作虽然都是针对EXCEL工作簿文件进行的，有的时候对象用的是<code>Workbooks</code>，比如<code>Workbooks.Add</code>，但有时又用<code>ActiveWorkbook</code>，比如<code>ActiveWorkbook.Save</code>。两者最大的区别就在于前者是泛指工作簿这样的对象，因为此时还没创建具体的工作簿文件，而后者则是具体的已经创建完成的工作簿文件。</p>
-<p>简言之，前者是泛指的对象，后者则是具体的对象。<br>不仅工作簿如此，工作表也是这样，比如新建一个工作表，代码为：<code>Sheets.Add</code>，若是已经存在的工作表，则可以直接进行操作，比如<code>Sheet1.Name = &quot;test&quot;</code>即是将目前的sheet1的表名修改为test。</p>
-<p>最后，咱们一起来做个练习，要求是这样的：<br>新建一个EXCEL工作簿文件，并在其中第一张工作表的A1单元格内填入“OK”，然后另存为到D盘，并命名为test.xlsx<br>VBA代码如下：</p>
-<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> shishi()</span><br><span class="line"></span><br><span class="line">Workbooks.Add</span><br><span class="line">Sheets(<span class="number">1</span>).Range(<span class="string">&quot;A1&quot;</span>) = <span class="string">&quot;OK&quot;</span></span><br><span class="line">ActiveWorkbook.SaveAs Filename:=<span class="string">&quot;d:\test.xlsx&quot;</span></span><br><span class="line">ActiveWorkbook.Close</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
-<p>建议自己打开VBA代码窗口，运行一下上述代码，实际感受一下效果。另外还可以尝试修改其中的某些代码，让它实现不同的效果。</p>
-<p>更多惊喜等你发现哦！</p>
+        <p>通过<a target="_blank" rel="noopener" href="https://leezhengqi.github.io/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/">入门篇</a>的学习，咱们一起基本压清了程序的概念，也知道了这玩意其实并不神秘，只是需要花些时间而已，只需按照<a target="_blank" rel="noopener" href="https://leezhengqi.github.io/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/">入门篇</a>里的学习导图逐步深入学习而已。</p>
+<p>本来这样按部就班地学下去就可以了，但是学习过程中我发现，由于涉及到知识点过多，一不小心就会陷入到细节中，纠结于一些细枝末节，结果反倒耽误了很多时间，再加上如果总是学一些很碎片的点，却不知道这些点串起来能实现什么东西的话，时间长了，学习的热情就会慢慢消退。<br>打个比方，如果你玩过拼图或乐高，一定会有组装完成的产品示意图以及组装说明书，然后给你一堆零件，开始拼装，试想如果只是给你一堆零件，也没是个示意图，你如何下手？从何处做起？<span id="more"></span></p>
+<p>程序编写亦是如此，首先要展现出一个全景图，让人有个直观认识，大概要完成什么事情，然后再去拆解每一个步骤。说到底，只是碎片化学习知识点，很枯燥，收效也甚低，只有把这些点放在一个程序中，让它切实地发挥自身的作用，这个时候，再去学习它的用法，就更容易理解，也更容易吸收一些。</p>
+<p>可是程序那么多，应该从哪里入手呢？还记得程序的最小单元是什么吗？<br>是的，是<strong>函数</strong>，函数是个很好的，可以作为刚开始学习时入口的东西，因为它的特点是“麻雀虽小，但五脏俱全”。说它小，因为它“只完成一个功能”，只需完成一个功能。说它“五脏俱全”是因为它具备一个程序所应有的所有基本特征，即：<strong>IPO</strong>。</p>
+<blockquote>
+<p>I：input（输入）<br>P：process（处理）<br>O：output（输出）</p>
+</blockquote>
+<p>试想，任何一个程序是不是都是这样，“将输入的参数，进行内部处理，然后输出结果”。<br>其中“P处理的部分”就类似于一个黑匣子，你只需输入一个东西，然后等着结果就行了，至于内部怎么处理的，不用管。</p>
+<p>就好像我们平日里用灯泡一样，大多数情况下，我们只要知道开关的使用方法就够了 —— 至于为什么按到这个方向上灯会亮，为什么按到另外一个方向上灯会灭，并不是我们作为用户必须关心的事情……</p>
+<p>在我们使用函数或程序时，常常忽略它的内部如何完成从输入到输出之间的处理过程。当然，这只是当我们作为用户的角色时可以这样做，但如果我们是开关的设计者，就不一样了，你必须知道其中的运作原理，熟知其中的操作规则，这也就是我们如果要学编程，必须学习一些语法规则，弄懂原理的原因所在，因为我们是设计者。</p>
+<p>但学习python有个极大的好处，就是即使我们是设计者，但很多时候，还是可以任性地把自己当成“用户”，用 Python 编程的时候，更多的情况下，只不过是在使用别人已经写好的函数，我们要做的只不过是梳理清楚做事的逻辑，弄清楚需要用到哪些函数以及这些函数怎么使用，最后把这些函数按照逻辑整合在一起而已。当然，这么说有些绝对，有时候，个性化需求还是需要咱们自己编写函数的。</p>
+<p>之前经常听人说，python是最容易学的语言，不明白他们为啥这么说？因为学了好几次也没学会。如今再细品这句话，才发现真是那么回事，试想，你想要实现的功能，有很多都被别人用函数写好了，直接拿过来用就行，是不是贼方便？</p>
+<p>你可能经常听说类似的话语，“python有丰富的第三方库”，这里面说的“第三方库”就是别人写好的东西，我们可以在自己的程序里，直接调用就行，而不用重复写一遍，即，不用“重复造轮子”。</p>
+<p>那么，就让咱们从<strong>函数</strong>这个最小单元开始，学习编程吧。<br>学习步骤是这样：<br>首先，要知道一个函数怎么用，就是别人写好的函数，你要知道怎么用它来完成自己的事情；<br>然后，尝试自己写一些函数，我们又称之为“自定义函数”，用于实现程序中的个性化需求。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%885%EF%BC%89/" data-id="cklru94k1000kiwu10zy78f9d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/03/03/python%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/" data-id="cklt6vfak0000mou1drhxdppn" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">VBA基础知识</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">python基础知识</a></li></ul>
 
     </footer>
   </div>
@@ -119,19 +126,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/02/27/VBA%E5%AD%A6%E4%B9%A0%EF%BC%886%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          VBA学习（单元格对象操作）
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/02/26/VBA%E5%AD%A6%E4%B9%A0%EF%BC%884%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/03/03/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88EXCEL%E6%96%87%E4%BB%B6%E4%B8%AD%E5%9B%BE%E7%89%87%E6%8F%90%E5%8F%96%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">VBA学习（工作表对象的操作）</div>
+      <div class="article-nav-title">VBA常用代码（EXCEL文件中图片提取）</div>
     </a>
   
 </nav>
