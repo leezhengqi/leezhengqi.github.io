@@ -12,13 +12,13 @@
 <meta property="og:site_name" content="lee的编程小屋">
 <meta property="og:description" content="在入门篇中，咱们提到函数是编程学习最好的入口，因为它“麻雀虽小，五脏俱全”。一个函数虽然只能完成一个功能的实现，但却完美地具备了程序的所有特征：IPO，即：输入、处理、输出。今天这篇就通过一个程序实例，实际感受下函数是怎么一回事。说起接下来的这个程序，可不是随便写的什么代码，可是有渊源的。因为它与一首当年很流行的歌有关，《100 Bottles of Beer On The Wall》。而程序运行">
 <meta property="og:locale">
-<meta property="og:image" content="http://yoursite.com/2021/03/04/Python%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B%EF%BC%89/100bottles.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/leezhengqi/picture/master/11.png?raw=true">
 <meta property="article:published_time" content="2021-03-04T05:57:05.821Z">
-<meta property="article:modified_time" content="2021-03-05T12:27:35.903Z">
+<meta property="article:modified_time" content="2021-03-05T12:53:16.408Z">
 <meta property="article:author" content="leezhengqi">
 <meta property="article:tag" content="python基础知识">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2021/03/04/Python%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B%EF%BC%89/100bottles.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/leezhengqi/picture/master/11.png?raw=true">
   
     <link rel="alternate" href="/atom.xml" title="lee的编程小屋" type="application/atom+xml">
   
@@ -99,11 +99,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在<a target="_blank" rel="noopener" href="https://leezhengqi.github.io/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/">入门篇</a>中，咱们提到函数是编程学习最好的入口，因为它“麻雀虽小，五脏俱全”。<br>一个函数虽然只能完成一个功能的实现，但却完美地具备了程序的所有特征：IPO，即：输入、处理、输出。<br>今天这篇就通过一个程序实例，实际感受下函数是怎么一回事。<br>说起接下来的这个程序，可不是随便写的什么代码，可是有渊源的。因为它与一首当年很流行的歌有关，<code>《100 Bottles of Beer On The Wall》</code>。<br>而程序运行的结果则是将这首歌曲的歌词全部打印出来，好，赶紧来<br>围观一下吧：</p>
+        <p>在<a target="_blank" rel="noopener" href="https://leezhengqi.github.io/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/">入门篇</a>中，咱们提到函数是编程学习最好的入口，因为它“麻雀虽小，五脏俱全”。<br>一个函数虽然只能完成一个功能的实现，但却完美地具备了程序的所有特征：IPO，即：输入、处理、输出。<br>今天这篇就通过一个程序实例，实际感受下函数是怎么一回事。<br>说起接下来的这个程序，可不是随便写的什么代码，可是有渊源的。因为它与一首当年很流行的歌有关，<code>《100 Bottles of Beer On The Wall》</code>。<br>而程序运行的结果则是将这首歌曲的歌词全部打印出来，好，赶紧来<br>围观一下吧：<span id="more"></span></p>
 <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">n = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">def bottle(n):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>: <span class="keyword">return</span> <span class="string">&quot;no more bottles of beer&quot;</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>: <span class="keyword">return</span> <span class="string">&quot;one bottle of beer&quot;</span></span><br><span class="line">    <span class="keyword">return</span> str(n) + <span class="string">&quot; bottles of beer&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">    print(bottle(i), <span class="string">&quot;on the wall,&quot;</span>)</span><br><span class="line">    print(bottle(i) + <span class="string">&quot;.&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;Take one down, pass it around,&quot;</span>)</span><br><span class="line">    print(bottle(i-<span class="number">1</span>), <span class="string">&quot;on the wall.&quot;</span>)</span><br></pre></td></tr></table></figure>
 <p>上述代码中，<code>def bottle(n)： </code>就是定义了一个名叫<code>bottle(n)</code>的函数模块，以便能够在接下来的代码中，即<code>For</code>循环中调用它，进而完成整个程序想要实现的事情。</p>
 <p>那么这段代码最终的运行结果是怎样的呢？前面说了，它就是一首歌曲的歌词。以下就是最终呈现的结果：</p>
-<p><img src="100bottles.png" alt="avatar"></p>
+<p><img src="https://raw.githubusercontent.com/leezhengqi/picture/master/11.png?raw=true"></p>
 <p>建议你对照一下上面的歌词，也就是程序的运行结果，再回头看看代码，理解一下这段代码是如何完成的这个事儿？函数在其中又是发挥了什么作用呢？如果没有函数，还能不能完成？如果也一样能够完成同样的事情，那为什么还要去定义函数，函数存在的意义到底是什么呢？</p>
 
       
