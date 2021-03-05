@@ -68,6 +68,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Python学习（函数实例）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/04/Python%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B%EF%BC%89/" class="article-date">
+  <time datetime="2021-03-04T05:57:05.821Z" itemprop="datePublished">2021-03-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/04/Python%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B%EF%BC%89/">python学习（函数实例）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在<a target="_blank" rel="noopener" href="https://leezhengqi.github.io/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/">入门篇</a>中，咱们提到函数是编程学习最好的入口，因为它“麻雀虽小，五脏俱全”。<br>一个函数虽然只能完成一个功能的实现，但却完美地具备了程序的所有特征：IPO，即：输入、处理、输出。<br>今天这篇就通过一个程序实例，实际感受下函数是怎么一回事。<br>说起接下来的这个程序，可不是随便写的什么代码，可是有渊源的。因为它与一首当年很流行的歌有关，<code>《100 Bottles of Beer On The Wall》</code>。<br>而程序运行的结果则是将这首歌曲的歌词全部打印出来，好，赶紧来<br>围观一下吧：</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">n = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">def bottle(n):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>: <span class="keyword">return</span> <span class="string">&quot;no more bottles of beer&quot;</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>: <span class="keyword">return</span> <span class="string">&quot;one bottle of beer&quot;</span></span><br><span class="line">    <span class="keyword">return</span> str(n) + <span class="string">&quot; bottles of beer&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">    print(bottle(i), <span class="string">&quot;on the wall,&quot;</span>)</span><br><span class="line">    print(bottle(i) + <span class="string">&quot;.&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;Take one down, pass it around,&quot;</span>)</span><br><span class="line">    print(bottle(i-<span class="number">1</span>), <span class="string">&quot;on the wall.&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>上述代码中，<code>def bottle(n)： </code>就是定义了一个名叫<code>bottle(n)</code>的函数模块，以便能够在接下来的代码中，即<code>For</code>循环中调用它，进而完成整个程序想要实现的事情。</p>
+<p>那么这段代码最终的运行结果是怎样的呢？前面说了，它就是一首歌曲的歌词。以下就是最终呈现的结果：</p>
+<p><img src="100bottles.png" alt="avatar"></p>
+<p>建议你对照一下上面的歌词，也就是程序的运行结果，再回头看看代码，理解一下这段代码是如何完成的这个事儿？函数在其中又是发挥了什么作用呢？如果没有函数，还能不能完成？如果也一样能够完成同样的事情，那为什么还要去定义函数，函数存在的意义到底是什么呢？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2021/03/04/Python%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B%EF%BC%89/" data-id="cklwa125s0000sou13m6lamci" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">python基础知识</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-VBA常用代码（文件名提取）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/03/03/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E6%96%87%E4%BB%B6%E5%90%8D%E6%8F%90%E5%8F%96%EF%BC%89/" class="article-date">
@@ -496,53 +544,6 @@
 
 
   
-    <article id="post-VBA常用代码（表格合并）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/" class="article-date">
-  <time datetime="2021-02-27T05:42:22.830Z" itemprop="datePublished">2021-02-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/">常用代码</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/">VBA常用代码（表格合并）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>日常工作中，每天都要用到EXCEL，不可避免地会遇到表格的合并、拆分等操作，数量少的时候还好办，一旦数量多起来，就显得很繁琐。<br>以下一些代码就是在不同场景下进行表格合并，可以根据实际情况进行适当调整。<br>以下代码还有一个好处也非常实用，如果你注意到<strong>壳子</strong>的字样，就意味着在<strong>壳子</strong>中间的部分，可以自由发挥，即做一些你想对EXCEL做的操作，这样一来，程序的灵活性就大了些，可调整的余地也更大了。<br>建议仔细看看这些代码，然后上手实操，感受一下：
-        
-          <p class="article-more-link">
-            <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E5%90%88%E5%B9%B6%EF%BC%89/" data-id="cklru94k6000uiwu1codi0v1z" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" rel="tag">VBA常用代码</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -576,7 +577,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/VBA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 16.67px;">VBA基础知识</a> <a href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 20px;">VBA常用代码</a> <a href="/tags/python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 13.33px;">python基础知识</a> <a href="/tags/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">python常用代码</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 13.33px;">感悟</a> <a href="/tags/%E8%B6%B3%E8%BF%B9/" style="font-size: 13.33px;">足迹</a>
+      <a href="/tags/VBA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 17.5px;">VBA基础知识</a> <a href="/tags/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 20px;">VBA常用代码</a> <a href="/tags/python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 15px;">python基础知识</a> <a href="/tags/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">python常用代码</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 12.5px;">感悟</a> <a href="/tags/%E8%B6%B3%E8%BF%B9/" style="font-size: 12.5px;">足迹</a>
     </div>
   </div>
 
@@ -598,6 +599,10 @@
       <ul>
         
           <li>
+            <a href="/2021/03/04/Python%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B%EF%BC%89/">python学习（函数实例）</a>
+          </li>
+        
+          <li>
             <a href="/2021/03/03/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E6%96%87%E4%BB%B6%E5%90%8D%E6%8F%90%E5%8F%96%EF%BC%89/">VBA常用代码（文件名提取）</a>
           </li>
         
@@ -611,10 +616,6 @@
         
           <li>
             <a href="/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/">python学习（入门篇）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%EF%BC%89/">VBA常用代码（自定义函数）</a>
           </li>
         
       </ul>

@@ -3,20 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>python之爱在心口难开 | lee的编程小屋</title>
+  <title>python学习（函数实例） | lee的编程小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="人生苦短，我用Python  记得Python大火的那段时间，到处都是催生荷尔蒙激素的宣传语，冲动之下，我入“坑”了。鸡血了一阵子，根据课程的进度，打卡学习，不可否认，也学了一些东西，但是最初的激情随着时间的推移，开始慢慢消退。其中一个关键因素是：用不到。如今想来，最容易导致学习半途而废的，恐怕非它莫属了。试想，每天只进不出，是啥感觉？行走的“貔貅”吗！">
+  <meta name="description" content="在入门篇中，咱们提到函数是编程学习最好的入口，因为它“麻雀虽小，五脏俱全”。一个函数虽然只能完成一个功能的实现，但却完美地具备了程序的所有特征：IPO，即：输入、处理、输出。今天这篇就通过一个程序实例，实际感受下函数是怎么一回事。说起接下来的这个程序，可不是随便写的什么代码，可是有渊源的。因为它与一首当年很流行的歌有关，《100 Bottles of Beer On The Wall》。而程序运行">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python之爱在心口难开">
-<meta property="og:url" content="http://yoursite.com/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:title" content="python学习（函数实例）">
+<meta property="og:url" content="http://yoursite.com/2021/03/04/Python%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B%EF%BC%89/index.html">
 <meta property="og:site_name" content="lee的编程小屋">
-<meta property="og:description" content="人生苦短，我用Python  记得Python大火的那段时间，到处都是催生荷尔蒙激素的宣传语，冲动之下，我入“坑”了。鸡血了一阵子，根据课程的进度，打卡学习，不可否认，也学了一些东西，但是最初的激情随着时间的推移，开始慢慢消退。其中一个关键因素是：用不到。如今想来，最容易导致学习半途而废的，恐怕非它莫属了。试想，每天只进不出，是啥感觉？行走的“貔貅”吗！">
+<meta property="og:description" content="在入门篇中，咱们提到函数是编程学习最好的入口，因为它“麻雀虽小，五脏俱全”。一个函数虽然只能完成一个功能的实现，但却完美地具备了程序的所有特征：IPO，即：输入、处理、输出。今天这篇就通过一个程序实例，实际感受下函数是怎么一回事。说起接下来的这个程序，可不是随便写的什么代码，可是有渊源的。因为它与一首当年很流行的歌有关，《100 Bottles of Beer On The Wall》。而程序运行">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-03-02T03:14:28.672Z">
-<meta property="article:modified_time" content="2021-03-02T06:09:16.950Z">
+<meta property="og:image" content="http://yoursite.com/2021/03/04/Python%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B%EF%BC%89/100bottles.png">
+<meta property="article:published_time" content="2021-03-04T05:57:05.821Z">
+<meta property="article:modified_time" content="2021-03-05T12:27:35.903Z">
 <meta property="article:author" content="leezhengqi">
-<meta property="article:tag" content="足迹">
+<meta property="article:tag" content="python基础知识">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/03/04/Python%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B%EF%BC%89/100bottles.png">
   
     <link rel="alternate" href="/atom.xml" title="lee的编程小屋" type="application/atom+xml">
   
@@ -71,14 +73,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-python学习（1）" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Python学习（函数实例）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" class="article-date">
-  <time datetime="2021-03-02T03:14:28.672Z" itemprop="datePublished">2021-03-02</time>
+    <a href="/2021/03/04/Python%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B%EF%BC%89/" class="article-date">
+  <time datetime="2021-03-04T05:57:05.821Z" itemprop="datePublished">2021-03-04</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%B6%B3%E8%BF%B9/">编程足迹</a>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
   </div>
 
   </div>
@@ -89,7 +91,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      python之爱在心口难开
+      python学习（函数实例）
     </h1>
   
 
@@ -97,21 +99,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong><font color='red'> 人生苦短，我用Python </font></strong></p>
-<p>记得Python大火的那段时间，到处都是催生荷尔蒙激素的宣传语，冲动之下，我入“坑”了。<br>鸡血了一阵子，根据课程的进度，打卡学习，不可否认，也学了一些东西，但是最初的激情随着时间的推移，开始慢慢消退。<br>其中一个关键因素是：用不到。如今想来，最容易导致学习半途而废的，恐怕非它莫属了。试想，每天只进不出，是啥感觉？行走的“貔貅”吗！<span id="more"></span></p>
-<p>实际上，在这背后，更深层次的原因是没有反馈。不管什么事情，若想持续下去，即时反馈既重要又必要，因为这能让你意识到：哦，这个玩意用在这个地方，蛮不错的，我得好好学。总之，无论是自身获得的成就感，还是来自外部的认可，都会是你坚持下去的动力。<br>当初没能认识到这一点，所以我的第一次Python之旅，还没怎么开始，就宣告结束了。</p>
-<p>时光荏苒，斗转星移。</p>
-<p>编程这玩意就像勾子一样，深深地埋在了我的心头，说不定什么时候就会被“勾引”出来。<br>这次被“勾引”，再次启动python学习，缘起于老胥不经意间说起的一句话。</p>
-<p>老胥何许人也？<br>之前文章里提到的编程大神，是也！<br>他说，抛开什么大数据，人工智能的不谈，就说日常办公这方面。如今Wps用的人越来越多，而VBA虽然在office里用起来很方便，但wps对它却不太友好。而python就没有这样的限制了，叫他万能胶水语言，一点也不为过。<br>而且，python学起来不难，因为它的语法比较接近自然语言，只要你逻辑思路够清楚，又不对英语有很大反感，任何人都可以学会。</p>
-<p>说实话，最后这句给我吃了个定心丸。于是，开始蠢蠢欲动，摩拳擦掌。<br>但真正地再次踏上python学习之旅，还是随后出现的一件事，引发的。<br>欲知后事如何，请听下回分解。<br><a target="_blank" rel="noopener" href="https://leezhengqi.github.io/2021/02/25/python%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81/">python初体验</a></p>
+        <p>在<a target="_blank" rel="noopener" href="https://leezhengqi.github.io/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/">入门篇</a>中，咱们提到函数是编程学习最好的入口，因为它“麻雀虽小，五脏俱全”。<br>一个函数虽然只能完成一个功能的实现，但却完美地具备了程序的所有特征：IPO，即：输入、处理、输出。<br>今天这篇就通过一个程序实例，实际感受下函数是怎么一回事。<br>说起接下来的这个程序，可不是随便写的什么代码，可是有渊源的。因为它与一首当年很流行的歌有关，<code>《100 Bottles of Beer On The Wall》</code>。<br>而程序运行的结果则是将这首歌曲的歌词全部打印出来，好，赶紧来<br>围观一下吧：</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">n = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">def bottle(n):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>: <span class="keyword">return</span> <span class="string">&quot;no more bottles of beer&quot;</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>: <span class="keyword">return</span> <span class="string">&quot;one bottle of beer&quot;</span></span><br><span class="line">    <span class="keyword">return</span> str(n) + <span class="string">&quot; bottles of beer&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">    print(bottle(i), <span class="string">&quot;on the wall,&quot;</span>)</span><br><span class="line">    print(bottle(i) + <span class="string">&quot;.&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;Take one down, pass it around,&quot;</span>)</span><br><span class="line">    print(bottle(i-<span class="number">1</span>), <span class="string">&quot;on the wall.&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>上述代码中，<code>def bottle(n)： </code>就是定义了一个名叫<code>bottle(n)</code>的函数模块，以便能够在接下来的代码中，即<code>For</code>循环中调用它，进而完成整个程序想要实现的事情。</p>
+<p>那么这段代码最终的运行结果是怎样的呢？前面说了，它就是一首歌曲的歌词。以下就是最终呈现的结果：</p>
+<p><img src="100bottles.png" alt="avatar"></p>
+<p>建议你对照一下上面的歌词，也就是程序的运行结果，再回头看看代码，理解一下这段代码是如何完成的这个事儿？函数在其中又是发挥了什么作用呢？如果没有函数，还能不能完成？如果也一样能够完成同样的事情，那为什么还要去定义函数，函数存在的意义到底是什么呢？</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2021/03/02/python%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" data-id="cklru94ka0012iwu1bpi816kf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2021/03/04/Python%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B%EF%BC%89/" data-id="cklwa125s0000sou13m6lamci" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B6%B3%E8%BF%B9/" rel="tag">足迹</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">python基础知识</a></li></ul>
 
     </footer>
   </div>
@@ -119,19 +120,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/03/02/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          VBA常用代码（删除操作）
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/02/27/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E8%A1%A8%E6%A0%BC%E6%8B%86%E5%88%86%E4%B8%8E%E7%AD%9B%E9%80%89%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/03/03/VBA%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%88%E6%96%87%E4%BB%B6%E5%90%8D%E6%8F%90%E5%8F%96%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">VBA常用代码（表格拆分&amp;筛选）</div>
+      <div class="article-nav-title">VBA常用代码（文件名提取）</div>
     </a>
   
 </nav>
